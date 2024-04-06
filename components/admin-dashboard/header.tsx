@@ -1,10 +1,13 @@
+import React from 'react';
 
-
-export default function Header() {
+const Header = () => {
     return (
-        <header className="w-full px-6 py-3 bg-orange-500 flex items-center justify-between">
-            <div className="text-white font-semibold text-lg"> Logo</div>
-            <div className="text-white font-semibold text-lg">Dashboard</div>
+        <header className="bg-orange-600">
+            <div className="container mx-auto p-4 flex items-center justify-between font-semibold text-2xl text-white">
+                Admin Dashboard
+            </div>
         </header>
-    )
-}
+    );
+};
+
+export default Header;

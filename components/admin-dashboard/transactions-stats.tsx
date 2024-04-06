@@ -9,10 +9,10 @@ export default function Earnings() {
     // use efffect to feth the datas
 
     return (
-        <div className="mx-16 px-6 py-8 rounded-md shadow mt-10 md:max-w-[60rem] md:mx-auto">
+        <div className="mt-16 mx-6 rounded-lg shadow-md px-6 py-8 xl:max-w-[70rem] xl:mx-auto">
             <div className='font-semibold text-lg'>Transactions</div>
             <div className="flex items-stretch justify-around mt-6 flex-wrap gap-8">
-                {mockdata.map((ele, index) => <TransactionsFormer key={index} router={router} title={ele.title} value={ele.value} type={ele.type} />)}
+                {mockdata.map((ele, index) => <Another key={index} router={router} title={ele.title} value={ele.value} type={ele.type} />)}
             </div>
         </div>
     )
@@ -34,13 +34,37 @@ const TransactionsFormer: React.FC<TransactionsFormerProps> = ({ title, value, r
     }
 
     return (
-        <div onClick={handleClick} className="hover:bg-orange-50 mouse-event-pointer min-h-20 bg-gray-50 rounded-lg flex flex-col justify-beween gap-4 px-5 py-6">
-            <div><div className="w-[4rem] h-[4rem] rounded-full bg-orange-100"></div></div>
-            <div className="font-bold text-2xl text-right pr-7">{value}</div>
-            <div className="text-orange-400">{title}</div>
+        <div className="flex items-center bg-white shadow-md rounded-lg p-4">
+            <div className="text-3xl text-orange-500 mr-4">{'oo'}</div>
+            <div>
+                <div className="text-2xl font-semibold">{value}</div>
+                <div className="text-gray-600">{title}</div>
+            </div>
         </div>
     )
 };
+
+
+
+const Another: React.FC<TransactionsFormerProps> = ({ title, value, router, type }) => {
+
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        event.currentTarget.style.opacity = '0.4';
+        router.push(`/admin/transactions/${type}`);
+    }
+
+    return (
+        <div className="flex flex-col bg-white shadow-md rounded-lg p-6">
+      <div className="text-3xl text-orange-500 mb-4">{'icon'}</div>
+      <div>
+        <div className="text-lg font-semibold mb-1">{value}</div>
+        <div className="text-gray-600 text-sm">{title}</div>
+      </div>
+    </div>
+    )
+};
+
+
 
 
 interface mockdataType {
@@ -78,5 +102,5 @@ const mockdata: mockdataType[] = [
 ]
 
 
-export { TransactionsFormer };
+export { TransactionsFormer, Another };
 export type { mockdataType };
