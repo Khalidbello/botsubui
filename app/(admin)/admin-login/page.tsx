@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface formDataTypes {
     username: string;
@@ -8,6 +9,8 @@ interface formDataTypes {
 }
 
 export default function Page() {
+    const router  = useRouter()
+
     const [showUserNameError, setShowUserNameError] = useState<boolean>(false);
     const [showPasswordError, setShowPasswordError] = useState<boolean>(false);
     const [showWrongCredentials, setShowWrongCredentials] = useState<boolean>(false);
@@ -39,8 +42,8 @@ export default function Page() {
             if (formData?.password) {
                 // submit form data for validation
                 setTimeout(() => {
-                    setShowWrongCredentials(true);
-                    enableBt()
+                    enableBt();
+                    router.push('/admin-dashboard');
                 }, 5000);
             } else {
                 setShowPasswordError(true);

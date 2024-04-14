@@ -1,10 +1,11 @@
 'use client';
 
 import Header from '@/components/admin-dashboard/header';
-import Transactions from '@/components/admin-dashboard/transactions-stats';
-import Earnings from '@/components/admin-dashboard/earnings';
-import ToDaysEarning from '@/components/admin-dashboard/todays-earning';
+import Transactions from '@/components/admin-dashboard/statistics/transaction-stats/transactions-stats';
+import Earnings from '@/components/admin-dashboard/statistics/earnings';
+import ToDaysEarning from '@/components/admin-dashboard/statistics/todays-earning';
 import Loader from '@/components/admin-dashboard/loader';
+import Balances from '@/components/admin-dashboard/statistics/balances';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -13,12 +14,12 @@ export default function Page() {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
     useEffect(() => {
-        setTimeout(() => setLoggedIn(true), 1000);
+        setTimeout(() => setLoggedIn(true), 400);
 
-        setTimeout(() => {
-            if (!loggedIn) router.push('/admin-login')
-        }, 2000);
-    });
+        /*setTimeout(() => {
+            //if (!loggedIn) router.push('/admin-login')
+        }, 400);*/
+    }, []);
 
     return (
         <>
@@ -28,6 +29,7 @@ export default function Page() {
                     <ToDaysEarning />
                     <Earnings />
                     <Transactions />
+                    <Balances />
                 </>
             ) : (
                 <Loader />
