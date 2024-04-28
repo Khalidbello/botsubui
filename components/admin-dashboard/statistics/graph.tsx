@@ -53,10 +53,8 @@ function Example({ dates, counts, profits }: { dates: string[], counts: number[]
 
 
     return (
-        <div className="flex justify-center items-center h-full">
-            <div className='border border-gray-400 pt-0 rounded-xl w-full h-full my-auto shadow-xl'>
-                <canvas id='myChart' className="h-full w-full" ref={chartRef}></canvas>
-            </div>
+        <div className='min-h-[15rem] min-w-[30rem] w-full h-full my-auto border border-gray-400 pt-0 rounded-xl shadow-xl'>
+            <canvas id='myChart' className="rounded-xl h-full w-full" ref={chartRef}></canvas>
         </div>
     )
 }

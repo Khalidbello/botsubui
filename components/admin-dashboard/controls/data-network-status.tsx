@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Loader2 from '@/components/admin-dashboard/loader2';
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 interface networksType {
     name: string;
     active: boolean;
 };
 
-export default function DataNetworkStatus() {
+export default function DataNetworkStatus({ url, router }: { url: string | undefined; router: AppRouterInstance }) {
     const [networks, setNetworks] = useState<networksType[]>([]);
     const [showLoader, setShowLoader] = useState<boolean>(true);
     const [showError, setShowError] = useState<boolean>(false);
@@ -24,6 +25,7 @@ export default function DataNetworkStatus() {
         };
         const requestOptions = {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json', // Specify content type as JSON
                 // Add any other headers if required
@@ -31,7 +33,7 @@ export default function DataNetworkStatus() {
             body: JSON.stringify(postData) // Convert JavaScript object to JSON string
         };
 
-        fetch('http://localhost:8080/admin/network-status', requestOptions)
+        fetch(`${url}/network-status`, requestOptions)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -52,7 +54,7 @@ export default function DataNetworkStatus() {
 
     useEffect(() => {
         // make fetch request to get datanetwork current statsu
-        fetch('http://localhost:8080/admin/network-status')
+        fetch(`${url}/network-status`, { credentials: 'include' })
             .then((response) => {
                 if (response.status === 200) {
                     return response.json();
@@ -75,15 +77,14 @@ export default function DataNetworkStatus() {
                 setShowError(true);
                 setShowLoader(false);
             })
-    }, [showLoader]);
+    }, [showLoader, url]);
 
     return (
-        <div className="flex flex-col items-center justify-center h-auto rounded-xl px-6 py-4 shadow-md max-w-xl mx-4 md:mx-auto mt-12">
+        <div className="mt-20 flex flex-col items-center justify-center h-auto rounded-xl px-6 py-4 shadow-md max-w-xl mx-4 md:mx-auto">
             <h2 className="text-xl font-semibold mb-4">Network Status</h2>
             {showError ? (
                 <div className="text-sm text-red-500 text-center"> Sorry an error occured... <br /> pls try reloading page</div>
             ) : (
-
                 showLoader ? (
                     <Loader2 h='h-[4rem]' />
                 ) : (

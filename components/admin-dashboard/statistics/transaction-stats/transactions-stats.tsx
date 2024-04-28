@@ -3,6 +3,7 @@
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 import React, { use, useEffect, useState } from "react";
+import Loader2 from '@/components/admin-dashboard/loader2';
 
 
 // Function to get the current date in YYYY-MM-DD format
@@ -28,7 +29,7 @@ interface DateRangeType {
     endDate: string;
 };
 
-export default function Earnings() {
+export default function Earnings({ url, router }: { url: string | undefined; router: AppRouterInstance }) {
     const [showError, setShowError] = useState<boolean>(false);
     const [data, setData] = useState<mockdataType[]>([]);
     const [dataFetched, setDataFetched] = useState<boolean>(false);
@@ -36,18 +37,20 @@ export default function Earnings() {
         startDate: '2024-04-01',
         endDate: getCurrentDate()
     });
-    const router = useRouter();
-
+   
     useEffect(() => {
         setDataFetched(false);
         // Fetch data from API
-        fetch(`http://localhost:8080/admin/statistics/${dateRange.startDate}/${dateRange.endDate}`)
+        fetch(`${url}/statistics/${dateRange.startDate}/${dateRange.endDate}`, { credentials: 'include' })
             .then(response => {
                 if (response.status === 200) {
                     console.log('in full statisitics.....................', 2000000000000000000000);
                     return response.json();
                 } else if (response.status === 401) {
                     console.log('unauthorized access.....');
+                    router.push('/admin-login');
+                } else {
+                    throw 'Something went wron trying to fetch statisics';
                 }
             })
             .then(data => {
@@ -95,14 +98,14 @@ export default function Earnings() {
                 <FilterComponent setDateRange={setDateRange} getCurrentDate={getCurrentDate} />
             </div>
             {showError ? (
-                <div className="text-red-500 text-sm text-center"> Sorry something went wrong.. <br /> please try reloading page</div>
+                <div className="text-red-500 text-sm text-center">An error occured... <br /> please try reloading page</div>
             ) : (
                 <div className="flex items-stretch justify-around mt-6 flex-wrap gap-8">
                     {
                         dataFetched ? (
                             data.map((ele: mockdataType, index: number) => <Another key={index} router={router} title={ele.title} value={ele.value} type={ele.type} />)
                         ) : (
-                            <div className="w-full text-center px-6 py-10 text-orange-600 text-2xl">Loading...</div>
+                            <Loader2 h='h-[4rem]' />
                         )}
                 </div>
             )

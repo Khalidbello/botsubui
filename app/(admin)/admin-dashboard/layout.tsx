@@ -1,17 +1,19 @@
-import NavBar from '@/components/admin-dashboard/nav';
+import { NavBar, Mnav } from '@/components/admin-dashboard/nav';
 
 export default function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode
 }>) {
+    const url: string | undefined = process.env.NEXT_PUBLIC_NODE_ENV === 'development' ? process.env.NEXT_PUBLIC_DEV_URL : process.env.NEXT_PUBLIC_PROD_URL;
     return (
-        <div className="w-full h-full flex items-stretch">
+        <div className="w-full h-full flex items-stretch relative">
             <div className="hidden md:block bg-gray-200 border-[2px] border-r-gray-100 min-w-[15rem] w-[15rem] h-full">
-                <NavBar />
+                <NavBar url={url} />
             </div>
             <div className="flex-grow overflow-y-auto pb-12">
                 {children}
+                <Mnav url={url} />
             </div>
         </div>
     )

@@ -11,29 +11,17 @@ import { useRouter } from 'next/navigation';
 
 export default function Page() {
     const router = useRouter();
-    const [loggedIn, setLoggedIn] = useState<boolean>(false);
-
-    useEffect(() => {
-        setTimeout(() => setLoggedIn(true), 400);
-
-        /*setTimeout(() => {
-            //if (!loggedIn) router.push('/admin-login')
-        }, 400);*/
-    }, []);
-
+    const url: string | undefined = process.env.NEXT_PUBLIC_NODE_ENV === 'development' ? process.env.NEXT_PUBLIC_DEV_URL : process.env.NEXT_PUBLIC_PROD_URL;
+    console.log('ur;lllllllllllllllllll................', url, process.env.NEXT_PUBLIC_NODE_ENV, process.env.NEXT_PUBLIC_DEV_URL);
+ 
     return (
         <>
-            {loggedIn ? (
-                <>
-                    <Header />
-                    <ToDaysEarning />
-                    <Earnings />
-                    <Transactions />
-                    <Balances />
-                </>
-            ) : (
-                <Loader />
-            )}
+
+            <Header />
+            <ToDaysEarning url={url} router={router} />
+            <Earnings url={url} router={router} />
+            <Transactions url={url} router={router} />
+            <Balances url={url} router={router} />
         </>
     )
 }
