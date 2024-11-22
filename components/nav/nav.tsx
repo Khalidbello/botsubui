@@ -24,9 +24,7 @@ const NavBar = ({ url }: { url: string | undefined }) => {
         <Link
           href={"/admin"}
           className={`flex items-center justify-center hover:bg-blue-300 bg-blue-100 text-center rounded-full px-4 py-1 ${
-            path === "/admin-dashboard"
-              ? "bg-blue-400 text-white"
-              : "text-blue-600 "
+            path === "/admin" ? "bg-blue-400 text-white" : "text-blue-600 "
           } `}
         >
           <FontAwesomeIcon
@@ -38,7 +36,7 @@ const NavBar = ({ url }: { url: string | undefined }) => {
         <Link
           href={"/admin/controls"}
           className={`flex items-center justify-center hover:bg-blue-300 bg-blue-100 text-center rounded-full px-4 py-1 ${
-            path === "/admin-dashboard/controls"
+            path === "/admin/controls"
               ? "bg-blue-400 text-white"
               : "text-blue-600 "
           } `}
@@ -67,56 +65,6 @@ const NavBar = ({ url }: { url: string | undefined }) => {
   );
 };
 
-const Mnav = ({ url }: { url: string | undefined }) => {
-  const currentPath = usePathname();
-  const router = useRouter();
-
-  return (
-    <nav className="md:hidden p-1 bg-white flex items-center justify-around w-[90%] rounded-full border-solid border-[2px] border-blue-100 fixed bottom-[5px] left-[5%]">
-      <Link
-        href={"/admin-dashboard"}
-        className="flex justify-center items-center gap-x-1 p-1"
-      >
-        <FontAwesomeIcon
-          icon={faChartBar}
-          className={`text-blue-600 h-4 p-2 rounded-xl ${
-            currentPath === "/admin" ? "bg-blue-100" : ""
-          }`}
-        />
-        <span className="text-sm">
-          {currentPath === "/admin" && "Staistics"}
-        </span>
-      </Link>
-      <Link
-        href={"/admin-dashboard/controls"}
-        className="flex justify-center items-center gap-x-1 p-1"
-      >
-        <FontAwesomeIcon
-          icon={faGamepad}
-          className={`text-blue-600 h-4 p-2 rounded-xl ${
-            currentPath === "/admin/controls" ? "bg-blue-100" : ""
-          }`}
-        />
-        <span className="text-sm">
-          {currentPath === "/admin/controls" && "Controls"}
-        </span>
-      </Link>
-      <button
-        onClick={() => logOut(url, router)}
-        className="flex justify-center items-center gap-x-1 p-1"
-      >
-        <FontAwesomeIcon
-          icon={faSignOut}
-          className={`text-blue-600 h-4 p-2 rounded-xl ${
-            false ? "bg-blue-100" : ""
-          }`}
-        />
-        <span className="text-sm"></span>
-      </button>
-    </nav>
-  );
-};
-
 // helper function to handle logout
 const logOut = async (url: string | undefined, router: AppRouterInstance) => {
   try {
@@ -135,4 +83,4 @@ const logOut = async (url: string | undefined, router: AppRouterInstance) => {
   }
 };
 
-export { NavBar, Mnav };
+export { NavBar };
