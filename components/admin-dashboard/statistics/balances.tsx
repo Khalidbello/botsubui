@@ -46,7 +46,7 @@ export default function Balances({ url, router }: { url: string | undefined; rou
                 setShowErrorOccured(true);
                 setDataFetched(true);
             })
-    }, []);
+    }, [router, url]);
 
     return (
         <div className="mb-10 mt-16 mx-6 rounded-lg shadow-md px-4 py-8 xl:max-w-[70rem] xl:mx-auto">

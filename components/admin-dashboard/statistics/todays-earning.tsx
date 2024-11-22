@@ -56,7 +56,7 @@ export default function ToDaysEarning({ url, router }: { url: string | undefined
                 setShowErrorOccured(true);
                 setDataFetched(true);
             });
-    }, []);
+    }, [router, url]);
 
     return (
         <div className='mt-20 mx-6 rounded-lg shadow-md px-6 py-8 xl:max-w-[70rem] xl:mx-auto'>

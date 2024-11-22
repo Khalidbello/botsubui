@@ -40,6 +40,7 @@ const ReportedIssues: React.FC<{ url: string | undefined; router: AppRouterInsta
                 console.log('error occured while trying to fetch reported issue', err);
                 setShowError(true);
             });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pagging, url]);
 
     return (

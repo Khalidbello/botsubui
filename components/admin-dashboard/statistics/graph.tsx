@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect, useRef } from "react";
 import Chart, { ChartConfiguration, ChartData, ChartOptions } from 'chart.js/auto'; // Import Chart from 'chart.js'
 

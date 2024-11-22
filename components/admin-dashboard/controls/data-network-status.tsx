@@ -33,7 +33,15 @@ export default function DataNetworkStatus({ url, router }: { url: string | undef
             body: JSON.stringify(postData) // Convert JavaScript object to JSON string
         };
 
-        fetch(`${url}/network-status`, requestOptions)
+        fetch(`${url}/network-status`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json', // Specify content type as JSON
+                // Add any other headers if required
+            },
+            body: JSON.stringify(postData) // Convert JavaScript object to JSON string
+        })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

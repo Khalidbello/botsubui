@@ -2,7 +2,7 @@ import { transactionType } from '@/components/admin-dashboard/controls/pending-t
 import { useRef, useState } from 'react';
 
 
-const UnitPending: React.FC<{ transaction: transactionType; url: string; }> = ({ transaction, url }) => {
+const UnitPending: React.FC<{ transaction: transactionType; url: string | undefined; }> = ({ transaction, url }) => {
     const [showSuccesful, setShowSuccesful] = useState<boolean>(false);
     const [showError, setShowError] = useState<string>('');
     const retryBt = useRef<HTMLButtonElement | null>(null);

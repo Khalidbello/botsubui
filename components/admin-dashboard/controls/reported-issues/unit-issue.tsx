@@ -4,7 +4,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 
 interface UnitIssueProp {
     issue: Issue,
-    url: string,
+    url: string | undefined,
     router: AppRouterInstance
 }
 

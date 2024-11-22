@@ -89,7 +89,7 @@ export default function Earnings({ url, router }: { url: string | undefined; rou
                 setDataFetched(true);
                 setShowError(true);
             });
-    }, [dateRange]);
+    }, [dateRange, router, url]);
 
     return (
         <div className="mt-16 mx-6 rounded-lg shadow-md px-6 py-8 xl:max-w-[70rem] xl:mx-auto">

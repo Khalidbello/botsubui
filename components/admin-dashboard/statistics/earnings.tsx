@@ -34,7 +34,7 @@ export default function Earnings({ url, router }: { url: string | undefined; rou
                 setShowError(true);
                 setDataFetched(true);
             });
-    }, []);
+    }, [router, url]);
 
     return (
         <div className="mt-16 px-2 md:px-6 mx-8 md:max-w-[80rem] md:mx-auto">

@@ -2,24 +2,28 @@
 
 import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 interface formDataTypes {
     username: string;
     password: string;
-}
+};
 
 export default function Page() {
     const router = useRouter()
 
     const [showUserNameError, setShowUserNameError] = useState<boolean>(false);
     const [showPasswordError, setShowPasswordError] = useState<boolean>(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const [error, setShowError] = useState<string>('');
     const [showLoggedIn, setShowLoggedIn] = useState<string>('');
     const [formData, updateFormdata] = useState<formDataTypes>({
         username: '',
         password: ''
     });
-    const url: string | undefined = process.env.NEXT_PUBLIC_NODE_ENV === 'development' ? process.env.NEXT_PUBLIC_DEV_URL : process.env.NEXT_PUBLIC_PROD_URL;
+    const passwordVisibilityRef = useRef<HTMLButtonElement | null>(null);
+    const url: string | undefined = process.env.NEXT_PUBLIC_URL;
 
     const button = useRef<HTMLButtonElement | null>(null);
 
@@ -59,6 +63,7 @@ export default function Page() {
 
                     if (response.status === 200) {
                         setShowLoggedIn('Logged in succeesfully');
+                        setShowError('');
                         console.log(response.headers);
                         const data = await response.json();
                         console.log(data);
@@ -97,7 +102,11 @@ export default function Page() {
             password: event.currentTarget.value
         });
         setShowPasswordError(false);
-    }
+    };
+
+    const handlePasswordVisiblity = () => {
+        setShowPassword(!showPassword);
+    };
 
     return (
         <div className="flex justify-center items-center w-full h-full px-6 bg-gray-100">
@@ -108,8 +117,18 @@ export default function Page() {
                 {showUserNameError && <div className="px-4 text-sm text-red-500">username cannot be empty</div>}
 
                 <div className="mt-8 mb-2 px-5"><label htmlFor="passsword">Paasword</label></div>
-                <input type="text" placeholder="password" name='userName' onChange={passwordChanged} className="w-full border-[2px] border-gray-100 rounded-full px-4 py-2" />
-
+                <div className="flex items-center justify-between mb-6 w-full border-gray-100 border-[1px] rounded-full">
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="password"
+                        name='userName'
+                        onChange={passwordChanged}
+                        className="w-full border-[2px] rounded-full px-4 py-2"
+                    />
+                    <button ref={passwordVisibilityRef} onClick={(e) => { e.stopPropagation(); handlePasswordVisiblity(); }} className='w-10 h-full'>
+                        <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} className="w-4 h-5" />
+                    </button>
+                </div>
                 {showPasswordError && <div className="px-4 text-sm text-red-500">username cannot be empty</div>}
                 <div className="text-green-400 text-center py-2">{showLoggedIn}</div>
                 <div className="my-8 text-center px-2 text-sm text-red-500">{error}</div>

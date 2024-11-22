@@ -50,7 +50,7 @@ const PendingTransactions: React.FC<{ url: string | undefined; router: AppRouter
                 setShowError(true);
                 setShowMoreLoader(false);
             })
-    }, [pagging]);
+    }, [pagging, transactions, url]);
 
     return (
         <div className="container mx-auto px-4 py-8 mt-8">
