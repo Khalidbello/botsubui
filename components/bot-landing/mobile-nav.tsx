@@ -1,7 +1,8 @@
 "use client";
 
-import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faStar, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import React, { useRef } from "react";
 
 const MobileNav = () => {
@@ -40,7 +41,7 @@ const MobileNav = () => {
         ref={btRef}
         className="flex items-center justify-center bg-red-500 w-7 h-7 rounded-full md:hidden"
       >
-        <FontAwesomeIcon icon={faBars} className="w-4 h-4" />
+        <FontAwesomeIcon icon={faBars} className="w-4 h-4 text-white" />
       </button>
       <Navigator
         hideMenu={hideMenu}
@@ -73,13 +74,27 @@ const Navigator: React.FC<{
           ref={hideMenuBtRef}
           className="w-6 h-6 bg-red-500 rounded-full absolute top-3 right-3 flex items-center justify-center"
         >
-          <FontAwesomeIcon icon={faX} className="text-white h-3" />
+          <FontAwesomeIcon icon={faX} className="text-white h-3 w-3" />
         </button>
-        <nav className="flex flex-col gap-y-3">
-          <span>About</span>
-          <span>Contact</span>
+
+        <nav className="flex flex-col items-start gap-y-3 mt-[4rem] text-purple-100 px-4">
+          <Link href={"/about"} className="group relative">
+            About
+            <span className="absolute left-0 bottom-0 h-[2px] w-full bg-purple-50 scale-x-0 group-hover:scale-x-100 transform origin-left transition-transform duration-1000" />
+          </Link>
+          <a href={"/#"} className="group relative">
+            Contact
+            <span className="absolute left-0 bottom-0 h-[2px] w-full bg-purple-50 scale-x-0 group-hover:scale-x-100 transform origin-left transition-transform duration-1000" />
+          </a>
         </nav>
-        <span></span>
+
+        <span className="absolute bottom-4 left-4 flex items-center justify-center gap-x-2 text-orange-600 font-semibold font-sans text-lg md:text-xl">
+          <FontAwesomeIcon
+            className="h-7 md:h-10 text-orange-900"
+            icon={faStar}
+          />
+          BotSub
+        </span>
       </div>
     </div>
   );

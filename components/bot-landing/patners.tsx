@@ -13,7 +13,7 @@ const Patners = () => {
             height={500}
             src="/flutterwave.png"
             alt="fluuterwave logo"
-            className="w-6 h-6 rounded-full"
+            className="w-5 h-5 rounded-full md:h-7 md:w-7"
           />
           Flutterwave
         </span>
@@ -23,7 +23,7 @@ const Patners = () => {
             alt="facebook logo"
             width={500}
             height={500}
-            className="w-6 h-6 rounded-full"
+            className="w-5 h-5 rounded-full md:h-7 md:w-7"
           />
           Facebook
         </span>
