@@ -14,7 +14,7 @@ const AboutPrduct = () => {
         praesentium error optio sint odit, totam doloremque iusto animi,
         temporibus explicabo dignissimos.
         <a
-          href="/#"
+          href="/https://www.facebook.com/profile.php?id=100094053438576"
           className="text-purple-400 underline text-sm gap-x-3 flex items-center justify-start"
         >
           Get started with BotSub{" "}

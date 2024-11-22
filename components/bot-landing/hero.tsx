@@ -10,9 +10,10 @@ const Hero = () => {
 
   const handleClicked = () => {
     setClicked(true);
+    router.push("https://www.facebook.com/profile.php?id=100094053438576");
     setTimeout(() => {
-      router.push("https://www.facebook.com/profile.php?id=100094053438576");
-    });
+      setClicked(false);
+    }, 1000);
   };
 
   return (
