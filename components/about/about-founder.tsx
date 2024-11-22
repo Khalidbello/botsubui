@@ -9,15 +9,15 @@ const AboutFounder = () => {
         <span className="bg-purple-600 text-white text-center max-w-[7rem] font-semibold text-xs px-3 py-1 rounded-full inline absolute left-[1rem] md:right-[6rem]  -top-[2rem] -rotate-6">
           About Founder
         </span>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-        molestias accusantium hic quis quae repellat, minus iste eaque
-        praesentium error optio sint odit, totam doloremque iusto animi,
-        temporibus explicabo dignissimos.
+        Khalid Bello, a Kaduna-based innovator, founded BotSub after
+        experiencing the frustration of running out of data while researching.
+        With sharp analytical skills and grit, he turned that challenge into a
+        seamless solution to keep everyone connected.{" "}
         <a
-          href="/#"
+          href="https://codenojutsu.vercel.app"
           className="text-purple-400 underline text-sm gap-x-3 flex items-center justify-start"
         >
-          Get started with BotSub{" "}
+          Get to know more about Khalid Bello{" "}
           <FontAwesomeIcon icon={faArrowRight} className="h-3" />
         </a>
       </p>

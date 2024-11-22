@@ -9,10 +9,11 @@ const AboutPrduct = () => {
         <span className="bg-purple-600 text-white text-center max-w-[7rem] font-semibold text-xs px-3 py-1 rounded-full inline absolute left-[1rem] md:right-[6rem]  -top-[2rem] -rotate-6">
           About BotSub
         </span>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-        molestias accusantium hic quis quae repellat, minus iste eaque
-        praesentium error optio sint odit, totam doloremque iusto animi,
-        temporibus explicabo dignissimos.
+        BotSub is your lifeline when you’re out of data, letting you buy data
+        and airtime effortlessly through Facebook Free Mode. No extra apps
+        needed, no hassle—just log into Facebook, search BotSub, and reconnect
+        instantly. Affordable, reliable, and always there, BotSub ensures you’re
+        never stranded offline.
         <a
           href="/https://www.facebook.com/profile.php?id=100094053438576"
           className="text-purple-400 underline text-sm gap-x-3 flex items-center justify-start"
@@ -21,7 +22,7 @@ const AboutPrduct = () => {
           <FontAwesomeIcon icon={faArrowRight} className="h-3" />
         </a>
       </div>
-      <div className="bg-purple-50 rounded-xl relative mt-[2rem]">
+      <div className="bg-purple-50 rounded-xl relative mt-[4rem]">
         <span className="bg-cyan-600 text-white text-xs px-3 py-1 rounded-full absolute right-[3rem] md:right-[6rem] -top-[3rem] rotate-12">
           ₦200/GB
         </span>
