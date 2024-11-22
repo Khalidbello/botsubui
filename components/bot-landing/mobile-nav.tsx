@@ -59,6 +59,8 @@ const Navigator: React.FC<{
   menuRef: React.MutableRefObject<HTMLDivElement | null>;
   menuRef0: React.MutableRefObject<HTMLDivElement | null>;
 }> = ({ hideMenu, hideMenuBtRef, menuRef, menuRef0 }) => {
+  const encodedNumber = encodeURIComponent("08188146243");
+
   return (
     <div
       onClick={(e) => hideMenu(e)}
@@ -82,7 +84,7 @@ const Navigator: React.FC<{
             About
             <span className="absolute left-0 bottom-0 h-[2px] w-full bg-purple-50 scale-x-0 group-hover:scale-x-100 transform origin-left transition-transform duration-1000" />
           </Link>
-          <a href={"/#"} className="group relative">
+          <a href={`https://wa.me/${encodedNumber}`} className="group relative">
             Contact
             <span className="absolute left-0 bottom-0 h-[2px] w-full bg-purple-50 scale-x-0 group-hover:scale-x-100 transform origin-left transition-transform duration-1000" />
           </a>

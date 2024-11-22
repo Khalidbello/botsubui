@@ -11,7 +11,7 @@ const Hero = () => {
   const handleClicked = () => {
     setClicked(true);
     setTimeout(() => {
-      router.push("http");
+      router.push("https://www.facebook.com/profile.php?id=100094053438576");
     });
   };
 
