@@ -5,7 +5,7 @@ import Footer from "@/components/bot-landing/footer";
 
 const Page = () => {
   return (
-    <div className="w-full h-full overflow-auto bg-yellow-50 flex justify-center items-center pt-[5rem]">
+    <div className="w-full h-full overflow-auto bg-yellow-50 flex justify-center items-center pt-[14rem]">
       <video
         autoPlay
         loop
@@ -17,7 +17,7 @@ const Page = () => {
         Your browser does not support the video tag.
       </video>
       <Header />
-      <div className="relative z-5 flex flex-col justify-center gap-y-[17%] items-center h-[60%] min-h-[30rem] max-h-[40rem] mb-[5rem]">
+      <div className="relative z-5 flex flex-col justify-center gap-y-[17%] items-center h-[60%] min-h-[30rem] max-h-[40rem] pb-[5rem]">
         <Hero />
         <Patners />
       </div>
