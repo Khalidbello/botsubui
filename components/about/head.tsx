@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 const Head = () => {
+  const encodedNumber = encodeURIComponent("08188146243");
+
   return (
     <header className="fixed top-0 left-0 flex justify-between items-center px-3 w-full py-2 bg-yellow-100 border-b-[2px] border-orange-100 z-20 md:px-5">
       <span className="font-semibold text-xl md:2xl">About</span>
@@ -14,7 +16,7 @@ const Head = () => {
           <FontAwesomeIcon icon={faHome} className="w-4 h-4 text-purple-600" />
         </Link>
         <a
-          href=""
+          href={`https://wa.me/${encodedNumber}`}
           className="relative group text-sm border-l-[2px] py-2 border-gray-500 ml-4 pl-4 transition-all duration-500 ease-in-out"
         >
           Contact
