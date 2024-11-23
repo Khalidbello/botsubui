@@ -91,7 +91,7 @@ const Navigator: React.FC<{
           </a>
         </nav>
 
-        <span className="flex items-center justify-center gap-x-2 text-gray-600 font-semibold font-sans text-lg md:text-xl">
+        <span className="absolute bottom-4 left-4 flex items-center justify-center gap-x-2 text-gray-600 font-semibold font-sans text-lg md:text-xl">
           <Image
             src="/logo.png"
             alt="logo for botsub"
