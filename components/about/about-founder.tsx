@@ -6,7 +6,7 @@ const AboutFounder = () => {
   return (
     <div className="flex flex-col items-center justify-around md:flex-row-reverse md:mt-6 gap-x-6 gap-y-4 mb-[6rem] max-w-[70rem] mx-auto">
       <p className="max-w-[17rem] rounded-xl bg-orange-50 p-3 text-gray-800 font-mono relative">
-        <span className="bg-purple-600 text-white text-center max-w-[7rem] font-semibold text-xs px-3 py-1 rounded-full inline absolute left-[1rem] md:right-[6rem]  -top-[2rem] -rotate-6">
+        <span className="bg-purple-600 text-white text-center max-w-[8rem] font-semibold text-xs px-3 py-1 rounded-full inline absolute left-[1rem] md:right-[6rem]  -top-[2rem] -rotate-6">
           About Founder
         </span>
         Khalid Bello, a Kaduna-based innovator, founded BotSub after
