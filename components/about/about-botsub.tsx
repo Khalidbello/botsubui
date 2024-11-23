@@ -31,8 +31,8 @@ const AboutPrduct = () => {
           alt="photo of botsub"
           width={500}
           height={500}
-          src="/fb.jpeg"
-          className="-mt-[2rem] ml-1 rounded-xl"
+          src="/botsub.png"
+          className="-mt-[4rem] ml-1 rounded-xl"
           objectFit="cover"
         />
       </div>
