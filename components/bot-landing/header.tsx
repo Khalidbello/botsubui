@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MobileNav from "./mobile-nav";
@@ -7,10 +8,13 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full flex items-center justify-between gap-x-10 px-5 py-2 bg-tranparent z-10">
-      <span className="flex items-center justify-center gap-x-2 text-orange-600 font-semibold font-sans text-lg md:text-xl">
-        <FontAwesomeIcon
-          className="h-7 md:h-10 text-orange-900"
-          icon={faStar}
+      <span className="flex items-center justify-center gap-x-2 text-gray-600 font-semibold font-sans text-lg md:text-xl">
+        <Image
+          src="/logo.png"
+          alt="logo for botsub"
+          width={500}
+          height={500}
+          className="w-[2rem]"
         />
         BotSub
       </span>

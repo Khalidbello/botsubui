@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { faBars, faStar, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -79,7 +80,7 @@ const Navigator: React.FC<{
           <FontAwesomeIcon icon={faX} className="text-white h-3 w-3" />
         </button>
 
-        <nav className="flex flex-col items-start gap-y-3 mt-[4rem] text-purple-100 px-4">
+        <nav className="flex flex-col items-start gap-y-3 mt-[4rem] text-purple-100 px-8 font-semibold">
           <Link href={"/about"} className="group relative">
             About
             <span className="absolute left-0 bottom-0 h-[2px] w-full bg-purple-50 scale-x-0 group-hover:scale-x-100 transform origin-left transition-transform duration-1000" />
@@ -90,10 +91,13 @@ const Navigator: React.FC<{
           </a>
         </nav>
 
-        <span className="absolute bottom-4 left-4 flex items-center justify-center gap-x-2 text-orange-600 font-semibold font-sans text-lg md:text-xl">
-          <FontAwesomeIcon
-            className="h-7 md:h-10 text-orange-900"
-            icon={faStar}
+        <span className="flex items-center justify-center gap-x-2 text-gray-600 font-semibold font-sans text-lg md:text-xl">
+          <Image
+            src="/logo.png"
+            alt="logo for botsub"
+            width={500}
+            height={500}
+            className="w-[2rem]"
           />
           BotSub
         </span>
