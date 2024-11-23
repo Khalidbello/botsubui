@@ -7,7 +7,7 @@ const Header = () => {
   const encodedNumber = encodeURIComponent("08188146243");
 
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center justify-between gap-x-10 px-5 py-2 bg-yello-100 bg-opacity-80 z-10">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between gap-x-10 px-5 py-2 bg-yellow-100 bg-opacity-80 z-10">
       <span className="flex items-center justify-center gap-x-1 text-gray-600 font-semibold font-sans text-lg md:text-xl">
         <Image
           src="/logo.png"
