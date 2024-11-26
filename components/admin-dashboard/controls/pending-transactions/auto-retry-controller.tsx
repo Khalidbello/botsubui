@@ -5,8 +5,32 @@ const SlidingButton: React.FC<{ url: string | undefined }> = ({ url }) => {
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const [isChecked, setIsChecked] = useState(true);
 
+  // fucntiion to fetch current state of auto retry from server
+  const fetchAutoRetryStatus = async () => {
+    try {
+      const response = await fetch(`${url}/get-auto-retry`, {
+        method: "GET",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.status !== 200) throw "Something went wrong";
+
+      const data = await response.json();
+      setIsChecked(data.autoRetry);
+    } catch (err) {
+      console.error(
+        "An error occured in fetching the status of auto retry",
+        err
+      );
+    } finally {
+      setShowLoader(false);
+    }
+  };
+
   const toggleChecked = async () => {
     setShowLoader(true);
+
     try {
       const response = await fetch(`${url}/set-auto-retry`, {
         headers: { "Content-Type": "application/json" },
@@ -27,11 +51,9 @@ const SlidingButton: React.FC<{ url: string | undefined }> = ({ url }) => {
   };
 
   useEffect(() => {
-    // fetch
-    setTimeout(() => {
-      setShowLoader(false);
-    }, 1000);
-  }, [isChecked]);
+    fetchAutoRetryStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div onClick={toggleChecked} className="relative inline-block w-12 h-6">
