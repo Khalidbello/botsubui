@@ -22,12 +22,15 @@ export default function ToDaysEarning({
 
   useEffect(() => {
     // Fetch data from API
+    console.log("url in tdays stats, ", url);
     fetch(`${url}/todays-statisitics`, { credentials: "include" })
       .then((response) => {
+        console.log("response in todays statistics, ", response);
         if (response.status === 200) {
           console.log(2000000000000000000000);
           return response.json();
         } else if (response.status === 401) {
+          console.log("push to login....... in todays earnig.........");
           router.push("/admin-login");
         } else {
           throw "something went wrong trying o fetch todays statistics";
