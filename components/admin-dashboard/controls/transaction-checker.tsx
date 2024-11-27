@@ -23,7 +23,7 @@ const TransactionSearch = ({
   };
 
   return (
-    <div className="mt-10 px-3 py-4 md:px-6 md:py-8 mx-4 bg-gray-100 rounded-xl">
+    <div className="mt-10 px-3 py-4 md:px-6 md:py-8 mx-4 bg-gray-100 rounded-xl max-w-xl md:mx-auto">
       <h2 className="font-semibold mb-6">Transaction Search</h2>
       <div className="flex items-center justify-center">
         <input

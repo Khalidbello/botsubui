@@ -84,6 +84,7 @@ const UnitPending: React.FC<{ transaction: transactionType; url: string | undefi
             <p><strong>SenderId:</strong> {transaction.senderId}</p>
             <p><strong>Amount:</strong> ${`xxx`}</p>
             <p><strong>Beneficiary:</strong> {transaction.beneficiary}</p>
+            <p><strong>info:</strong> {transaction.info}</p>
             <p><strong>Date:</strong> {transaction.date}</p>
 
             {showSuccesful && <div className='text-green-500 text-sm pl-3 mt-3'>Transaction succesfully settled</div>}

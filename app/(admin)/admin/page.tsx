@@ -16,7 +16,7 @@ export default function Page() {
   return (
     <>
       <Header />
-      <div className="px-4">
+      <div className="px-1 md:mx-4">
         <ToDaysEarning url={url} router={router} />
         <Earnings url={url} router={router} />
         <Transactions url={url} router={router} />

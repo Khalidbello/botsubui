@@ -16,6 +16,7 @@ interface transactionType {
   beneficiary: string;
   date: string;
   senderId: string;
+  info: string;
 }
 
 const PendingTransactions: React.FC<{
@@ -57,7 +58,7 @@ const PendingTransactions: React.FC<{
   }, [pagging, url]);
 
   return (
-    <div className="mt-10 mb-14 h-auto rounded-xl px-6 py-4 border-[1px] border-blue-100 max-w-2xl mx-4 md:mx-auto">
+    <div className="mt-10 mb-14 h-auto rounded-xl px-6 py-4 border-[1px] border-blue-100 max-w-[70rem] mx-4 md:mx-auto">
       <h2 className="font-semibold">Pending Transactions</h2>
       <div className="flex items-center justify-between mt-4 mb-6 px-8 py-4 md:justify-center max-w-[20em] mx-auto md:gap-x-5 shadow-md rounded-full">
         <span>Auto Retry</span> <SlidingButton url={url} />

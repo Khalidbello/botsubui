@@ -27,7 +27,7 @@ const Mnav = ({ url }: { url: string | undefined }) => {
 
   return (
     <>
-      <nav className="md:hidden p-1 bg-white flex items-center justify-around w-full rounded-t-[1.5rem] border-solid border-[2px] border-blue-100 fixed bottom-0 left-0">
+      <nav className="md:hidden p-1 bg-white flex items-center justify-around w-full rounded-t-[1.5rem] border-solid border-[2px] border-b-0 border-blue-100 fixed bottom-0 left-0">
         <Link
           href={"/admin"}
           className="flex justify-center items-center gap-x-1 p-1"
