@@ -156,6 +156,7 @@ export default function Page() {
           <button
             ref={passwordVisibilityRef}
             onClick={(e) => {
+              e.preventDefault();
               e.stopPropagation();
               handlePasswordVisiblity();
             }}
