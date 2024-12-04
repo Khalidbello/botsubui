@@ -48,8 +48,8 @@ def calcExhaustTemp(T1, M_dot, Cp, L, T_w):
     T = T1
     y = L  # vertical distance from the base of the heat guide to the current step
     C_l = 0  # keeps rescord of the current length of our iteratiion | verticl height we've covered
-    temp = []
-    inc_l = []
+    tempOut = []
+    incL = []
 
     """
     calculating R total of from exg to water in pot since
@@ -74,7 +74,7 @@ def calcExhaustTemp(T1, M_dot, Cp, L, T_w):
         r_i_sh1 = 1.1917 * (
             0.3542 - y
         )  # internal radius of heat guide at current step internal radius
-        t_al_sh = 0.001  # (m) thcikness of aluminium sheet for heat guide
+        t_al_sh = 0.002  # (m) thcikness of aluminium sheet for heat guide
         r_i_ins = r_i_sh1 + t_al_sh  # internal radius of thermal insulator
         r_i_sh2 = r_i_ins + t_ins_sh  # internal radius of external sheet of heat guide
 
@@ -102,8 +102,8 @@ def calcExhaustTemp(T1, M_dot, Cp, L, T_w):
         y -= dl  # for every step the distance from the cone tip increases which we need to calculate the new r of our heat guide
         num_iterations += 1
         C_l += dl
-        inc_l.append(C_l)
-        temp.append(T)
+        incL.append(C_l)
+        tempOut.append(T)
         """ print(
             "change in t",
             dT,
@@ -120,11 +120,13 @@ def calcExhaustTemp(T1, M_dot, Cp, L, T_w):
         )"""
 
     return [
-        temp,
-        inc_l,
+        tempOut,
+        incL,
         Q_hg_total / num_iterations,
         Q_w_total / num_iterations,
         T,
+        Q_w_total,
+        Q_hg_total,
     ]
 
 
@@ -133,7 +135,7 @@ M_dot = 0.0163  # (kg/s) mass flow rate of the exhaust gas same as mass flow rat
 Cp = 1005  # (j/kg.k) specific heat capacity of the exhaust gas
 L = 0.2  # (m) the vertical lenght of the heat guide from where the pot sits to the exit
 T_w = 373  # (k) temperture of water, will assuming the watr is already booling
-T_amb = 308  # (k) temperature of ambient air
+T_amb = 303  # (k) temperature of ambient air
 r_e_p = 0.1  # (m) external radius of pot
 t_p = 0.001  # (m) thickness of pot
 k_pot = 230  # (w/m.k) thermal conductivity of pot, pot is aluminium
@@ -150,12 +152,16 @@ h_air = 15  # (W/m²K) convective heat transfer coefficient for ambient air
 result = calcExhaustTemp(T1, M_dot, Cp, L, T_w)
 
 print(
-    "Averaeg heat flowrate through heat guide: ",
+    "Averaeg heat flowrate through heat guide @ dl = 0.00001: ",
     result[2],
-    "\nAverage heat flow rate to water: ",
+    "\nAverage heat flow rate to water @ dl = 0.00001: ",
     result[3],
     "\nOutput temperature: ",
     result[4],
+    "\n Total Rate of heat transfer through pot wall to water: ",
+    result[5],
+    "\n Total rate of heat through through heat guide: ",
+    result[6],
 )
 
 plotGraph(
