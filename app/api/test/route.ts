@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
-const test = (req: NextApiRequest, res: NextApiResponse) => {
-  res.json({ m: "working fine" });
+const GET = (req: NextApiRequest) => {
   try {
+    NextResponse.json({ message: "Wops runnig fine........." });
   } catch (err) {
-    res.status(500).json({ message: "Somethin went wrong" });
+    NextResponse.json({ message: "Somethin went wrong" });
   }
 };
 
-export default test;
+export { GET };
