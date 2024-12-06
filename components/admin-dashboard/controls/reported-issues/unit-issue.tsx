@@ -139,7 +139,7 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
         <span>{issue.date}</span>
       </div>
 
-      <div className="text-right space-x-5 mt-4">
+      <div className="text-right space-x-5 mt-4 flex items-center justify-end gap-x-2">
         <TogggleBotResponse senderId={issue.reporterId} url={url} />
         <button
           ref={submitBt}

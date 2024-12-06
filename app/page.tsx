@@ -2,20 +2,12 @@ import Header from "@/components/bot-landing/header";
 import Hero from "@/components/bot-landing/hero";
 import Patners from "@/components/bot-landing/patners";
 import Footer from "@/components/bot-landing/footer";
+import BackGround from "@/components/bot-landing/bg";
 
 const Page = () => {
   return (
     <div className="w-full h-full overflow-auto bg-yellow-50 flex justify-center items-center pt-[14rem]">
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover opacity-80 z-1"
-      >
-        <source src="/homepage_bg_slow_speed.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <BackGround />
       <Header />
       <div className="relative z-5 flex flex-col justify-center gap-y-[17%] items-center h-[60%] min-h-[30rem] max-h-[40rem] pb-[5rem]">
         <Hero />
