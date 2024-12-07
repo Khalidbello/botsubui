@@ -25,7 +25,8 @@ const TogggleBotResponse: React.FC<TogggleBotResponseProps> = ({
       if (response.status !== 200) throw "Something went wrong";
 
       const data = await response.json();
-      setIsChecked(data.botResposne);
+      console.log("data in fetc bot auto response: ", data.botResponse);
+      setIsChecked(data.botResponse);
     } catch (err) {
       console.error(
         "An error occured in fetching the status of auto retry",
@@ -51,7 +52,7 @@ const TogggleBotResponse: React.FC<TogggleBotResponseProps> = ({
         throw "An error occured updating bot response";
 
       const data = await response.json();
-      setIsChecked(data.settedTo);
+      setIsChecked(data.setTo);
     } catch (err) {
       console.error("An error occured updating auto retry", err);
     } finally {

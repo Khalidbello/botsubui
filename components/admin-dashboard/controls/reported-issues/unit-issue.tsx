@@ -26,7 +26,9 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
   };
 
   const closeIssue = () => {
-    fetch(`${url}/close-issue/${issue.id}`, { credentials: "include" })
+    fetch(`${url}/close-issue/${issue.id}/${issue.reporterId}`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (response.status === 200) {
           return response.json();
@@ -100,7 +102,7 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
 
   return (
     <div className="min-w-[18rem] max-w-xl flex-1 bg-white rounded-lg shadow-md p-4">
-      <p className="text-lg mb-2">
+      <p className="mb-2 text-sm">
         <span className="font-semibold">Description: </span>
         {issue.description}
       </p>
@@ -132,11 +134,11 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
         </div>
       )}
 
-      <div className="flex justify-end gap-x-6 items-center">
+      <div className="flex justify-end gap-x-6 items-center text-sm">
         <span>
           <span className="font-semibold">IssueId:</span> {issue.id}
         </span>
-        <span>{issue.date}</span>
+        <span className="text-xs">{issue.date}</span>
       </div>
 
       <div className="text-right space-x-5 mt-4 flex items-center justify-end gap-x-2">
