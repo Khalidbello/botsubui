@@ -28,6 +28,9 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
   const closeIssue = () => {
     fetch(`${url}/close-issue/${issue.id}/${issue.reporterId}`, {
       credentials: "include",
+      method: "POST",
+      body: JSON.stringify({ issue: issue.description }),
+      headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
         if (response.status === 200) {
