@@ -72,6 +72,8 @@ export default function Page() {
             router.push("/admin");
           } else if (response.status === 401) {
             setShowError("Login credentials not correct..");
+          } else if (response.status === 404) {
+            setShowError("User with credentials not found.");
           } else {
             setShowError("Something went wrong please try again.");
           }
