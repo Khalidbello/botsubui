@@ -8,10 +8,13 @@ const ButtonComponent: React.FC = () => {
 
   const handleClick = async () => {
     try {
-      const response = await fetch(`${url}/set-cookie`, {
-        method: "GET",
-        credentials: "include", // Ensures cookies are sent and received
-      });
+      const response = await fetch(
+        `https://lifestyleleverage.com.ng/botsub/set-cookie`,
+        {
+          method: "GET",
+          credentials: "include", // Ensures cookies are sent and received
+        }
+      );
 
       if (response.ok) {
         console.log("Cookie set successfully!");
