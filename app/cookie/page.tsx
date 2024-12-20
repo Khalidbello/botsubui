@@ -4,9 +4,11 @@ import React from "react";
 
 const ButtonComponent: React.FC = () => {
   // Function to handle button click
+  const url: string | undefined = process.env.NEXT_PUBLIC_URL;
+
   const handleClick = async () => {
     try {
-      const response = await fetch("http://localhost:3000/set-cookie", {
+      const response = await fetch(`${url}/set-cookie`, {
         method: "GET",
         credentials: "include", // Ensures cookies are sent and received
       });
