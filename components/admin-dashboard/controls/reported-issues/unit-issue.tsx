@@ -69,9 +69,9 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
       id: issue.id,
     };
 
-    const requestOptions = {
+    const requestOptions: any = {
       method: "POST",
-      Credentials: "include",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json", // Specify content type as JSON
         // Add any other headers if required
