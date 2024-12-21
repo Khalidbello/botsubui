@@ -32,6 +32,7 @@ export default function DataNetworkStatus({
     const postData = {
       network,
       status: !active,
+      info: !active ? "Deactivated by admin" : "Activated by admin",
     };
 
     fetch(`${url}/network-status`, {
@@ -73,10 +74,10 @@ export default function DataNetworkStatus({
       .then((data) => {
         console.log(data["MTN"], data, "data for net stats.......");
         setNetworks([
-          { name: "MTN", active: data["MTN"] },
-          { name: "Airtel", active: data["Airtel"] },
-          { name: "Glo", active: data["Glo"] },
-          { name: "9mobile", active: data["9mobile"] },
+          { name: "MTN", active: data["MTN"]["status"] },
+          { name: "Airtel", active: data["Airtel"]["status"] },
+          { name: "Glo", active: data["Glo"]["status"] },
+          { name: "9mobile", active: data["9mobile"]["status"] },
         ]);
         setShowLoader(false);
       })
