@@ -74,7 +74,7 @@ const TogggleBotResponse: React.FC<TogggleBotResponseProps> = ({
         ) : (
           <>
             <div
-              className={`w-full h-full rounded-full transition-colors duration-300 ${
+              className={`w-full h-full rounded-full transition-colors duration-300 text-sm ${
                 isChecked ? "bg-green-500" : "bg-gray-300"
               }`}
             ></div>

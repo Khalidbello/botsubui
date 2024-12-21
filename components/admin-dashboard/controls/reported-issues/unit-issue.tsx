@@ -148,14 +148,14 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
         <TogggleBotResponse senderId={issue.reporterId} url={url} />
         <button
           ref={submitBt}
-          className="bg-blue-50 text-blue-600 rounded-full px-6 py-2"
+          className="bg-blue-50 text-blue-600 rounded-full px-6 py-2 text-sm"
           onClick={() => handleResponseSubmit()}
         >
           Send
         </button>
         <button
           ref={closeBt}
-          className="bg-red-50 text-red-600 rounded-full px-6 py-2"
+          className="bg-red-50 text-red-600 rounded-full px-6 py-2 text-sm"
           onClick={() => closeIssue()}
         >
           Close issue
