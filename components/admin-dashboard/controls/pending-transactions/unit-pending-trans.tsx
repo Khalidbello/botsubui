@@ -15,70 +15,70 @@ const UnitPending: React.FC<{
     if (settleBt.current) settleBt.current.disabled = true;
   };
 
-  const handleRetry = (transactionId: string, txRef: string) => {
+  const handleRetry = async (transactionId: string, txRef: string) => {
     if (retryBt.current) retryBt.current.style.opacity = "0.4";
+    try {
+      const response = await fetch(
+        `${url}/retry-transaction/${transactionId}/${txRef}`,
+        {
+          credentials: "include",
+        }
+      );
 
-    fetch(`${url}/retry-transaction/${transactionId}/${txRef}`, {
-      credentials: "include",
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          throw "an error occured trying to retry failed transaction";
-        }
-      })
-      .then((datas) => {
-        console.log("retry respnse........", datas);
-        if (datas.status) {
-          setShowSuccesful(true);
-          setShowError("");
-          disableBt();
-        } else {
-          setShowError("transation retry faild....");
-          setShowSuccesful(false);
-        }
-      })
-      .catch((err) => {
-        console.log("error in retry unit transaction", err);
-        setShowError("transaction failed....");
-      })
-      .finally(() => {
-        if (retryBt.current) retryBt.current.style.opacity = "1";
-      });
+      if (response.status !== 200)
+        return setShowError(
+          "an error occured trying to retry failed transaction"
+        );
+
+      const data = await response.json();
+
+      if (data.status) {
+        setShowSuccesful(true);
+        setShowError("");
+        disableBt();
+      } else {
+        setShowError("transation retry faild....");
+        setShowSuccesful(false);
+      }
+    } catch (err) {
+      console.log("error in retry unit transaction", err);
+      setShowError("transaction failed....");
+    } finally {
+      if (retryBt.current) retryBt.current.style.opacity = "1";
+    }
   };
 
-  const handleSettle = (transactionId: string, senderId: string) => {
+  const handleSettle = async (transactionId: string, senderId: string) => {
     if (settleBt.current) settleBt.current.style.opacity = "0.4";
+    try {
+      const response = await fetch(
+        `${url}/settle-transaction/${transactionId}/${senderId}`,
+        {
+          credentials: "include",
+        }
+      );
 
-    fetch(`${url}/settle-transaction/${transactionId}/${senderId}`, {
-      credentials: "include",
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          throw "an error occured trying to settle failed transaction";
-        }
-      })
-      .then((data) => {
-        console.log("settle respnse........", data);
-        if (data.status) {
-          setShowSuccesful(true);
-          setShowError("");
-          disableBt();
-        } else {
-          setShowSuccesful(false);
-          setShowError("transaction settlement failed");
-        }
-      })
-      .catch((err) => {
-        console.log("error in settle unit transaction", err);
+      if (response.status === 401)
+        return setShowError("Please login to continue");
+      if (response.status !== 200)
+        return setShowError("Response for settlement was not okay");
+
+      const data = await response.json();
+      console.log("settle respnse........", data);
+      if (data.status) {
+        setShowSuccesful(true);
+        setShowError("");
+        disableBt();
+      } else {
+        setShowSuccesful(false);
         setShowError("transaction settlement failed");
-      })
-      .finally(() => {
-        if (settleBt.current) settleBt.current.style.opacity = "1";
-      });
+      }
+    } catch (err) {
+      console.log("error in settle unit transaction", err);
+      setShowError("An error occured making request try again");
+    } finally {
+      if (settleBt.current) settleBt.current.style.opacity = "1";
+    }
   };
 
   return (
