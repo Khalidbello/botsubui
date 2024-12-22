@@ -87,7 +87,7 @@ const UnitPending: React.FC<{
   return (
     <div
       key={transaction.id}
-      className="bg-white rounded-lg bg-gray-50 p-4 min-w-[20rem]"
+      className="rounded-lg bg-gray-50 p-4 min-w-[20rem]"
     >
       <p>
         <strong>ID:</strong> {transaction.id}
