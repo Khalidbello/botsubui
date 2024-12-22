@@ -13,6 +13,7 @@ interface transactionType {
   txRef: string;
   status: Boolean;
   product: string;
+  amount: number;
   beneficiary: string;
   date: string;
   senderId: string;

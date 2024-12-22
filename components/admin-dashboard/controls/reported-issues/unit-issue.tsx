@@ -104,7 +104,7 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
   };
 
   return (
-    <div className="min-w-[18rem] max-w-xl flex-1 bg-white rounded-lg shadow-md p-4">
+    <div className="min-w-[18rem] max-w-xl flex-1 bg-gray-50 rounded-lg p-4 mb-2">
       <p className="mb-2 text-sm">
         <span className="font-semibold">Description: </span>
         {issue.description}

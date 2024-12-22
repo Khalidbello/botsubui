@@ -26,6 +26,8 @@ const UnitPending: React.FC<{
         }
       );
 
+      if (response.status === 401)
+        return setShowError("Please login to continue");
       if (response.status !== 200)
         return setShowError(
           "an error occured trying to retry failed transaction"
@@ -85,7 +87,7 @@ const UnitPending: React.FC<{
   return (
     <div
       key={transaction.id}
-      className="bg-white rounded-lg shadow-md p-4 min-w-[20rem]"
+      className="bg-white rounded-lg bg-gray-50 p-4 min-w-[20rem]"
     >
       <p>
         <strong>ID:</strong> {transaction.id}
@@ -103,7 +105,7 @@ const UnitPending: React.FC<{
         <strong>SenderId:</strong> {transaction.senderId}
       </p>
       <p>
-        <strong>Amount:</strong> ${`xxx`}
+        <strong>Amount:</strong> ₦{transaction.amount}
       </p>
       <p>
         <strong>Beneficiary:</strong> {transaction.beneficiary}
