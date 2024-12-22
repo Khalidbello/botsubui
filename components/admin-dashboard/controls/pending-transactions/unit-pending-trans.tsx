@@ -1,3 +1,4 @@
+import dateFormatter from "@/app/utils/date-formatter";
 import { transactionType } from "@/components/admin-dashboard/controls/pending-transactions/pending-transaction-control";
 import { useRef, useState } from "react";
 
@@ -111,7 +112,7 @@ const UnitPending: React.FC<{
         <strong>info:</strong> {transaction.info}
       </p>
       <p>
-        <strong>Date:</strong> {transaction.date}
+        <strong>Date:</strong> {dateFormatter(new Date(transaction.date))}
       </p>
 
       {showSuccesful && (
