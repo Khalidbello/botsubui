@@ -146,16 +146,11 @@ const TransactionsFormer: React.FC<TransactionsFormerProps> = ({
   router,
   type,
 }) => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.currentTarget.style.opacity = "0.4";
-    router.push(`/admin/transactions/${type}`);
-  };
-
   return (
     <div className="hover:shadow-orange-400 flex items-center bg-white shadow-md rounded-lg p-4">
       <div className="text-3xl text-orange-500 mr-4">{"oo"}</div>
       <div>
-        <div className="text-2xl font-semibold">{value}</div>
+        <div className="text-lg font-semibold">{value}</div>
         <div className="text-gray-600">{title}</div>
       </div>
     </div>
@@ -168,11 +163,6 @@ const Another: React.FC<TransactionsFormerProps> = ({
   router,
   type,
 }) => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.currentTarget.style.opacity = "0.4";
-    router.push(`/admin/transactions/${type}`);
-  };
-
   return (
     <div className="hover:shadow-orange-400 flex flex-col bg-white shadow-md rounded-lg p-6">
       <div className="text-3xl text-orange-500 mb-4">{"icon"}</div>
