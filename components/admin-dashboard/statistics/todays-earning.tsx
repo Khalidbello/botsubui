@@ -71,7 +71,7 @@ export default function ToDaysEarning({
   }, [router, url]);
 
   return (
-    <div className="mt-20 mx-6 rounded-lg shadow-md px-6 py-8 xl:max-w-[70rem] xl:mx-auto">
+    <div className="mt-10 mx-6 rounded-lg shadow-md px-6 py-8 xl:max-w-[70rem] xl:mx-auto">
       <div className="font-semibold">Todays Earning</div>
       <div className="flex justify-around flex-col screenRow:flex-row items-stretch gap-6 mt-8">
         {dataFetched ? (
