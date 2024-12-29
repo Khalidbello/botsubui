@@ -12,7 +12,6 @@ import { useRef, useState } from "react";
 
 const Page = () => {
   const [inView, setInView] = useState<string>("profitUp");
-  const [tempele, setTempele] = useState<HTMLButtonElement | null>(null);
   const profitUpBtRef = useRef<HTMLButtonElement | null>(null);
   const profitDownBtRef = useRef<HTMLButtonElement | null>(null);
   const genericBtRef = useRef<HTMLButtonElement | null>(null);

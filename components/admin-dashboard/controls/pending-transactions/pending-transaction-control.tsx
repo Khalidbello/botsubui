@@ -59,9 +59,8 @@ const PendingTransactions: React.FC<{
   }, [pagging, url]);
 
   return (
-    <div className="mt-10 mb-14 h-auto rounded-xl px-6 py-4 border-[1px] border-blue-100 max-w-[70rem] mx-4 md:mx-auto">
-      <h2 className="font-semibold">Pending Transactions</h2>
-      <div className="flex items-center justify-between mt-4 mb-6 px-8 py-4 md:justify-center max-w-[20em] mx-auto md:gap-x-5 shadow-md rounded-full">
+    <div className="mb-14 h-auto rounded-xl px-6 py-4 max-w-[70rem] md:mx-auto">
+      <div className="flex items-center justify-between mt-4 mb-6 px-8 py-4 md:justify-center max-w-[20rem] mx-auto md:gap-x-5 shadow-md rounded-full">
         <span>Auto Retry</span> <SlidingButton url={url} />
       </div>
       {showError ? (
