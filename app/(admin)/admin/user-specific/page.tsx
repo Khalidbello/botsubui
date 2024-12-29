@@ -1,5 +1,6 @@
 "use client";
 
+import GenericStats from "@/components/admin-dashboard/user-specific-stats/generic-stats";
 import ProfitUp from "@/components/admin-dashboard/user-specific-stats/profit-up";
 import {
   faArrowDown,
@@ -78,8 +79,8 @@ const Page = () => {
       </header>
 
       {inView === "profitUp" && <ProfitUp />}
-      {inView === "profitDown" && <div>Profit down</div>}
-      {inView === "generic" && <div>generic</div>}
+      {inView === "profitDown" && <GenericStats />}
+      {inView === "generic" && <GenericStats />}
     </div>
   );
 };

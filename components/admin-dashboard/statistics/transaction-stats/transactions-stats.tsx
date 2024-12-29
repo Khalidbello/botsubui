@@ -226,5 +226,5 @@ const FilterComponent: React.FC<FilterComponentProp> = ({
   );
 };
 
-export { TransactionsFormer, Another };
-export type { mockdataType };
+export { TransactionsFormer, Another, FilterComponent, getCurrentDate };
+export type { mockdataType, DateRangeType };
