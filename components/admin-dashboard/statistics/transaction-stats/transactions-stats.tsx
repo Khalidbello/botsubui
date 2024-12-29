@@ -100,7 +100,7 @@ export default function Earnings({
   }, [dateRange, router, url]);
 
   return (
-    <div className="mt-16 mx-6 rounded-lg shadow-md px-6 py-8 xl:max-w-[70rem] xl:mx-auto">
+    <div className="mt-16 mx-6 rounded-lg border-[1px] border-blue-300  px-6 py-8 xl:max-w-[70rem] xl:mx-auto">
       <div className="font-semibold mb-2 flex justify-between items-start flex-wrap flex-col md:flex-row md:items-center">
         <span className="mb-2">Transactions </span>
         <FilterComponent

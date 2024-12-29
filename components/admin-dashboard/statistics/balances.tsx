@@ -58,7 +58,7 @@ export default function Balances({
   }, [router, url]);
 
   return (
-    <div className="mb-10 mt-16 mx-6 rounded-lg shadow-md px-4 py-8 xl:max-w-[70rem] xl:mx-auto">
+    <div className="mb-10 mt-16 mx-6 rounded-lg border-[1px] border-blue-300 px-4 py-8 xl:max-w-[70rem] xl:mx-auto">
       <div className="font-semibold">Balances</div>
       <div className="flex justify-around flex-col screenRow:flex-row items-stretch gap-6 mt-8">
         {dataFetched ? (
