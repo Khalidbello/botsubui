@@ -13,7 +13,6 @@ export default function Controls() {
 
   return (
     <>
-      <Header />
       <div className="px-1 md:px-6">
         <DataNetworkStatus url={url} router={router} />
         <TransactionSearch url={url} router={router} />
