@@ -83,14 +83,13 @@ export default function DataNetworkStatus({
       })
       .catch((err) => {
         console.log(err);
-        setShowError(true);
-        setShowLoader(false);
+        //setShowError(true);
+        setShowLoader(true);
       });
   }, [showLoader, url]);
 
   return (
-    <div className="mt-10 h-auto rounded-xl px-6 py-4 shadow-md max-w-xl mx-4 md:mx-auto">
-      <h2 className="font-semibold mb-4 text-left">Network Status</h2>
+    <div className="mt-10 flex items-center justify-center h-[80%] px-6 py-4 max-w-xl mx-4 md:mx-auto">
       {showError ? (
         <div className="text-sm text-red-500 text-center">
           {" "}

@@ -64,7 +64,7 @@ export default function Controls() {
             inView === "reportedIssues" && "border-b-2 border-b-blue-300"
           }`}
         >
-          Isseus
+          Issues
           <FontAwesomeIcon
             icon={faNoteSticky}
             className="w-3 h-3 text-blue-600"
