@@ -113,7 +113,7 @@ export default function Earnings({
           An error occured... <br /> please try reloading page
         </div>
       ) : (
-        <div className="flex justify-around flex-col screenRow:flex-row items-stretch gap-6 mt-8">
+        <div className="flex justify-around flex-col screenRow:flex-row flex-wrap  items-stretch gap-6 mt-8">
           {dataFetched ? (
             data.map((ele: mockdataType, index: number) => (
               <Another
