@@ -1,5 +1,6 @@
 "use client";
 
+import ProfitUp from "@/components/admin-dashboard/user-specific-stats/profit-up";
 import {
   faArrowDown,
   faArrowUp,
@@ -42,41 +43,41 @@ const Page = () => {
         <button
           ref={profitUpBtRef}
           onClick={(e) => changeView(e, "profitUp")}
-          className={`flex items-center justify-center gap-2 ${
+          className={`flex items-center justify-center gap-2 h-full ${
             inView === "profitUp" && "border-b-2 border-b-blue-300"
           }`}
         >
           Profits
-          <FontAwesomeIcon icon={faArrowUp} className="w-5 h-5 text-blue-600" />
+          <FontAwesomeIcon icon={faArrowUp} className="w-3 h-3 text-blue-600" />
         </button>
         <span className="w-[2px] h-[2rem] bg-gray-300"></span>
         <button
           ref={profitDownBtRef}
           onClick={(e) => changeView(e, "profitDown")}
-          className={`flex items-center justify-center gap-2 ${
+          className={`flex items-center justify-center gap-2 h-full ${
             inView === "profitDown" && "border-b-2 border-b-blue-300"
           }`}
         >
           Profits
           <FontAwesomeIcon
             icon={faArrowDown}
-            className="w-5 h-5 text-blue-600"
+            className="w-3 h-3 text-blue-600"
           />
         </button>
         <span className="w-[2px] h-[2rem] bg-gray-300"></span>
         <button
           ref={genericBtRef}
           onClick={(e) => changeView(e, "generic")}
-          className={`flex items-center justify-center gap-2 ${
+          className={`flex items-center justify-center gap-2 h-full ${
             inView === "generic" && "border-b-2 border-b-blue-300"
           }`}
         >
           Generic
-          <FontAwesomeIcon icon={faGlobe} className="w-5 h-5 text-blue-600" />
+          <FontAwesomeIcon icon={faGlobe} className="w-3 h-3 text-blue-600" />
         </button>
       </header>
 
-      {inView === "profitUp" && <div>Profit ups</div>}
+      {inView === "profitUp" && <ProfitUp />}
       {inView === "profitDown" && <div>Profit down</div>}
       {inView === "generic" && <div>generic</div>}
     </div>

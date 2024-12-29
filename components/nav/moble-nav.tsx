@@ -5,6 +5,7 @@ import {
   faChartBar,
   faGamepad,
   faSignOut,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -28,7 +29,7 @@ const Mnav = ({ url }: { url: string | undefined }) => {
 
   return (
     <>
-      <nav className="md:hidden p-1 bg-white flex items-center justify-around w-[97%] rounded-full border-solid border-[2px] border-b-0 border-blue-100 fixed bottom-0 left-0">
+      <nav className="md:hidden p-1 bg-white flex items-center justify-around w-[97%] rounded-full border-solid border-[2px] border-blue-100 fixed bottom-3 left-[1.5%]">
         <Link
           href={"/admin"}
           className="flex justify-center items-center gap-x-1 p-1"
@@ -55,6 +56,20 @@ const Mnav = ({ url }: { url: string | undefined }) => {
           />
           <span className="text-sm">
             {currentPath === "/admin/controls" && "Controls"}
+          </span>
+        </Link>
+        <Link
+          href={"/admin/user-specific"}
+          className="flex justify-center items-center gap-x-1 p-1"
+        >
+          <FontAwesomeIcon
+            icon={faUser}
+            className={`text-blue-600 h-4 p-2 rounded-xl ${
+              currentPath === "/admin/user-specific" ? "bg-blue-100" : ""
+            }`}
+          />
+          <span className="text-sm">
+            {currentPath === "/admin/user-specific" && "Users"}
           </span>
         </Link>
         <button
