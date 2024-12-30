@@ -50,7 +50,7 @@ export default function DataNetworkStatus({
       if (response.status !== 200)
         throw "An error occured updating network status";
 
-      const data = await response.json();
+      setShowLoader(true);
     } catch (err) {
       // Handle errors
       console.error("Error in update network:", err);
