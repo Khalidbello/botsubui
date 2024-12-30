@@ -42,58 +42,60 @@ export default function Controls() {
   };
 
   return (
-    <div className="w-full h-full pb-20">
-      <header className="w-full flex items-center justify-center gap-4 p-4">
-        <button
-          ref={networkStatusBtRef}
-          onClick={(e) => changeView(e, "networkStatus")}
-          className={`flex items-center justify-center gap-2 h-full ${
-            inView === "networkStatus" && "border-b-2 border-b-blue-300"
-          }`}
-        >
-          Network
-          <FontAwesomeIcon icon={faWifi} className="w-3 h-3 text-blue-600" />
-        </button>
-        <span className="w-[2px] h-[2rem] bg-gray-300"></span>
-        <button
-          ref={reportedIssuesBtRef}
-          onClick={(e) => changeView(e, "reportedIssues")}
-          className={`flex items-center justify-center gap-2 h-full ${
-            inView === "reportedIssues" && "border-b-2 border-b-blue-300"
-          }`}
-        >
-          Issues
-          <FontAwesomeIcon
-            icon={faNoteSticky}
-            className="w-3 h-3 text-blue-600"
-          />
-        </button>
-        <span className="w-[2px] h-[2rem] bg-gray-300"></span>
-        <button
-          ref={pendingTransactionsBtRef}
-          onClick={(e) => changeView(e, "pendingTransactions")}
-          className={`flex items-center justify-center gap-2 h-full ${
-            inView === "pendingTransactions" && "border-b-2 border-b-blue-300"
-          }`}
-        >
-          Pending
-          <FontAwesomeIcon icon={faClock} className="w-3 h-3 text-blue-600" />
-        </button>
-      </header>
+    <>
+      <div className="w-full h-full pb-20">
+        <header className="w-full flex items-center justify-center gap-4 p-4">
+          <button
+            ref={networkStatusBtRef}
+            onClick={(e) => changeView(e, "networkStatus")}
+            className={`flex items-center justify-center gap-2 h-full ${
+              inView === "networkStatus" && "border-b-2 border-b-blue-300"
+            }`}
+          >
+            Network
+            <FontAwesomeIcon icon={faWifi} className="w-3 h-3 text-blue-600" />
+          </button>
+          <span className="w-[2px] h-[2rem] bg-gray-300"></span>
+          <button
+            ref={reportedIssuesBtRef}
+            onClick={(e) => changeView(e, "reportedIssues")}
+            className={`flex items-center justify-center gap-2 h-full ${
+              inView === "reportedIssues" && "border-b-2 border-b-blue-300"
+            }`}
+          >
+            Issues
+            <FontAwesomeIcon
+              icon={faNoteSticky}
+              className="w-3 h-3 text-blue-600"
+            />
+          </button>
+          <span className="w-[2px] h-[2rem] bg-gray-300"></span>
+          <button
+            ref={pendingTransactionsBtRef}
+            onClick={(e) => changeView(e, "pendingTransactions")}
+            className={`flex items-center justify-center gap-2 h-full ${
+              inView === "pendingTransactions" && "border-b-2 border-b-blue-300"
+            }`}
+          >
+            Pending
+            <FontAwesomeIcon icon={faClock} className="w-3 h-3 text-blue-600" />
+          </button>
+        </header>
 
-      {inView === "networkStatus" && (
-        <DataNetworkStatus url={url} router={router} />
-      )}
-      {/* {inView === "reportedIssues" && (
+        {inView === "networkStatus" && (
+          <DataNetworkStatus url={url} router={router} />
+        )}
+        {/* {inView === "reportedIssues" && (
         <TransactionSearch url={url} router={router} />
       )} */}
-      {inView === "reportedIssues" && (
-        <ReportedIssues url={url} router={router} />
-      )}
-      {inView === "pendingTransactions" && (
-        <PendingTransactions url={url} router={router} />
-      )}
+        {inView === "reportedIssues" && (
+          <ReportedIssues url={url} router={router} />
+        )}
+        {inView === "pendingTransactions" && (
+          <PendingTransactions url={url} router={router} />
+        )}
+      </div>
       <div className="h-24"></div>
-    </div>
+    </>
   );
 }
