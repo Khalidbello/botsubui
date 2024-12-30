@@ -75,7 +75,7 @@ export default function Controls() {
           ref={pendingTransactionsBtRef}
           onClick={(e) => changeView(e, "pendingTransactions")}
           className={`flex items-center justify-center gap-2 h-full ${
-            inView === "pendingtransactions" && "border-b-2 border-b-blue-300"
+            inView === "pendingTransactions" && "border-b-2 border-b-blue-300"
           }`}
         >
           Pending

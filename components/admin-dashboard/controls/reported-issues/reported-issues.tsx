@@ -47,8 +47,7 @@ const ReportedIssues: React.FC<{
   }, [pagging, url]);
 
   return (
-    <div className="mt-10 h-auto rounded-xl px-6 py-4 shadow-md  max-w-[70rem] mx-4 md:mx-auto">
-      <h2 className="font-semibold mb-4">Reported Issues</h2>
+    <div className="mt-10 h-auto rounded-xl px-6 py-4 max-w-[70rem] mx-4 md:mx-auto">
       {showError ? (
         <div className="text-sm text-red-500 text-center">
           An error occured trying to fetch issues

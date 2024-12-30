@@ -15,6 +15,7 @@ const config: Config = {
       },
       screens: {
         screenRow: "650px",
+        screen1: "550px",
         tablet: "768px",
         desktop: "1024px",
         // Add more custom breakpoints as needed

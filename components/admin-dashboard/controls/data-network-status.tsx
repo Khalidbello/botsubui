@@ -7,6 +7,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 interface networksType {
   name: string;
   active: boolean;
+  info: string;
 }
 
 export default function DataNetworkStatus({
@@ -20,7 +21,7 @@ export default function DataNetworkStatus({
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const [showError, setShowError] = useState<boolean>(false);
 
-  const handleNetworkToggle = (
+  const handleNetworkToggle = async (
     e: React.MouseEvent<HTMLButtonElement>,
     index: number,
     network: string,
@@ -32,33 +33,29 @@ export default function DataNetworkStatus({
     const postData = {
       network,
       status: !active,
-      info: !active ? "Deactivated by admin" : "Activated by admin",
+      info: !active ? "Activated by admin" : "Deactivated by admin",
     };
 
-    fetch(`${url}/network-status`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json(); // Parse response body as JSON
-      })
-      .then((data) => {
-        // Handle response data
-        console.log("Response from server:", data);
-        setShowLoader(true);
-      })
-      .catch((error) => {
-        // Handle errors
-        console.error("Error in update network:", error);
-        setShowError(true);
+    try {
+      const response = await fetch(`${url}/network-status`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
       });
+
+      if (response.status === 401) return router.push("/admin-login");
+      if (response.status !== 200)
+        throw "An error occured updating network status";
+
+      const data = await response.json();
+    } catch (err) {
+      // Handle errors
+      console.error("Error in update network:", err);
+      setShowError(false);
+    }
   };
 
   useEffect(() => {
@@ -74,10 +71,26 @@ export default function DataNetworkStatus({
       .then((data) => {
         console.log(data["MTN"], data, "data for net stats.......");
         setNetworks([
-          { name: "MTN", active: data["MTN"]["status"] },
-          { name: "Airtel", active: data["Airtel"]["status"] },
-          { name: "Glo", active: data["Glo"]["status"] },
-          { name: "9mobile", active: data["9mobile"]["status"] },
+          {
+            name: "MTN",
+            active: data["MTN"]["status"],
+            info: data["MTN"]["info"],
+          },
+          {
+            name: "Airtel",
+            active: data["Airtel"]["status"],
+            info: data["Airtel"]["info"],
+          },
+          {
+            name: "Glo",
+            active: data["Glo"]["status"],
+            info: data["Glo"]["info"],
+          },
+          {
+            name: "9mobile",
+            active: data["9mobile"]["status"],
+            info: data["9mobile"]["info"],
+          },
         ]);
         setShowLoader(false);
       })
@@ -89,7 +102,7 @@ export default function DataNetworkStatus({
   }, [showLoader, url]);
 
   return (
-    <div className="mt-10 flex items-center justify-center h-[80%] px-6 py-4 max-w-xl mx-4 md:mx-auto">
+    <div className="mt-10 flex flex-col items-center justify-start screen1:justify-center  gap-y-20 h-[80%] px-6 py-4 max-w-xl mx-4 screen1:mx-auto">
       {showError ? (
         <div className="text-sm text-red-500 text-center">
           {" "}
@@ -98,29 +111,42 @@ export default function DataNetworkStatus({
       ) : showLoader ? (
         <Loader2 h="h-[4rem]" />
       ) : (
-        <div className="flex items-center justify-center gap-x-8 gap-y-6  flex-wrap">
-          {networks.map((network, index) => (
-            <div key={index} className="flex items-center space-x-2">
-              <button
-                className={`${
-                  network.active
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-300 text-gray-600"
-                } px-4 py-2 rounded-full`}
-                onClick={(e) =>
-                  handleNetworkToggle(e, index, network.name, network.active)
-                }
+        <>
+          <div className="flex items-center justify-center gap-x-8 gap-y-6 flex-wrap">
+            {networks.map((network, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <button
+                  className={`${
+                    network.active
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-300 text-gray-600"
+                  } px-4 py-2 rounded-full`}
+                  onClick={(e) =>
+                    handleNetworkToggle(e, index, network.name, network.active)
+                  }
+                >
+                  {network.name}
+                </button>
+                <div
+                  className={`w-4 h-4 rounded-full ${
+                    network.active ? "bg-green-500" : "bg-red-500"
+                  }`}
+                ></div>
+              </div>
+            ))}
+          </div>
+          <div className="w-full max-w-xl border-[1px] border-blue-300 p-6 rounded-xl">
+            {networks.map((network, index) => (
+              <p
+                key={index}
+                className="flex items-center jusitfy-start gap-x-4 mb-3"
               >
-                {network.name}
-              </button>
-              <div
-                className={`w-4 h-4 rounded-full ${
-                  network.active ? "bg-green-500" : "bg-red-500"
-                }`}
-              ></div>
-            </div>
-          ))}
-        </div>
+                <span className="font-semibold">{network.name}: </span>
+                <span>{network.info}</span>
+              </p>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

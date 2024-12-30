@@ -5,6 +5,8 @@ import {
   faGamepad,
   faSignOut,
   faChartBar,
+  faAdjust,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import Link from "next/link";
@@ -24,12 +26,14 @@ const NavBar = ({ url }: { url: string | undefined }) => {
         <Link
           href={"/admin"}
           className={`flex items-center justify-center hover:bg-blue-300 bg-blue-100 text-center rounded-full px-4 py-1 ${
-            path === "/admin" ? "bg-blue-400 text-white" : "text-blue-600 "
+            path === "/admin" ? "bg-blue-500 text-white" : "text-blue-600 "
           } `}
         >
           <FontAwesomeIcon
             icon={faChartBar}
-            className={`text-blue-600 h-4 p-2 rounded-xl`}
+            className={`${
+              path === "/admin" ? "bg-blue-500 text-white" : "text-blue-600 "
+            } h-4 p-2 rounded-xl}`}
           />
           Statistics
         </Link>
@@ -37,15 +41,37 @@ const NavBar = ({ url }: { url: string | undefined }) => {
           href={"/admin/controls"}
           className={`flex items-center justify-center hover:bg-blue-300 bg-blue-100 text-center rounded-full px-4 py-1 ${
             path === "/admin/controls"
-              ? "bg-blue-400 text-white"
+              ? "bg-blue-500 text-white"
               : "text-blue-600 "
           } `}
         >
           <FontAwesomeIcon
-            icon={faGamepad}
-            className={`text-blue-600 h-4 p-2 rounded-xl`}
+            icon={faAdjust}
+            className={`${
+              path === "/admin/controls"
+                ? "bg-blue-500 text-white"
+                : "text-blue-600 "
+            } h-4 p-2 rounded-xl}`}
           />
           Controls
+        </Link>
+        <Link
+          href={"/admin/user-specific"}
+          className={`flex items-center justify-center hover:bg-blue-300 bg-blue-100 text-center rounded-full px-4 py-1 ${
+            path === "/admin/user-specific"
+              ? "bg-blue-500 text-white"
+              : "text-blue-600 "
+          } `}
+        >
+          <FontAwesomeIcon
+            icon={faUser}
+            className={`${
+              path === "/admin/user-specific"
+                ? "bg-blue-500 text-white"
+                : "text-blue-600 "
+            } h-4 p-2 rounded-xl}`}
+          />
+          Users
         </Link>
 
         <button

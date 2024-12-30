@@ -66,7 +66,7 @@ const TogggleBotResponse: React.FC<TogggleBotResponseProps> = ({
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative flex items-start justify-center flex-wrap gap-x-2">
       <p>Bot auto response: </p>
       <div onClick={toggleChecked} className="relative inline-block w-12 h-6">
         {showLoader ? (

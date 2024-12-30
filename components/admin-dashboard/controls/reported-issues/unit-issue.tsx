@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Issue } from "@/components/admin-dashboard/controls/reported-issues/reported-issues";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import TogggleBotResponse from "./toggle-bot-reponse";
+import dateFormatter from "@/app/utils/date-formatter";
 
 interface UnitIssueProp {
   issue: Issue;
@@ -110,7 +111,7 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
         {issue.description}
       </p>
       <textarea
-        className="w-full h-20 border border-gray-300 rounded-md px-2 py-1 mb-2"
+        className="w-full h-16 border border-gray-300 rounded-md px-2 py-1 mb-2"
         placeholder="Enter response..."
         onChange={(event) => handleInputChange(event)}
       ></textarea>
@@ -141,7 +142,7 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
         <span>
           <span className="font-semibold">IssueId:</span> {issue.id}
         </span>
-        <span className="text-xs">{issue.date}</span>
+        <span className="text-xs">{dateFormatter(issue.date)}</span>
       </div>
 
       <div className="text-right space-x-5 mt-4 flex items-center justify-end gap-x-2 text-xs">

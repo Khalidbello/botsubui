@@ -1,5 +1,5 @@
 // functiont to format date to Nigeria time
-function dateFormatter(date: Date) {
+function dateFormatter(date: any) {
   const date0 = new Date(date);
   // Create an Intl.DateTimeFormat object with the Nigeria time zone
   const nigeriaFormatter = new Intl.DateTimeFormat("en-NG", {
