@@ -1,10 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Header from "@/components/admin-dashboard/header";
 import DataNetworkStatus from "@/components/admin-dashboard/controls/data-network-status";
 import ReportedIssues from "@/components/admin-dashboard/controls/reported-issues/reported-issues";
-import TransactionSearch from "@/components/admin-dashboard/controls/transaction-checker";
 import PendingTransactions from "@/components/admin-dashboard/controls/pending-transactions/pending-transaction-control";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
@@ -44,7 +42,7 @@ export default function Controls() {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full pb-20">
       <header className="w-full flex items-center justify-center gap-4 p-4">
         <button
           ref={networkStatusBtRef}
@@ -95,6 +93,7 @@ export default function Controls() {
       {inView === "pendingTransactions" && (
         <PendingTransactions url={url} router={router} />
       )}
+      <div className="h-24"></div>
     </div>
   );
 }

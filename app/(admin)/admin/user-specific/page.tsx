@@ -80,6 +80,7 @@ const Page = () => {
       {inView === "profitUp" && <ProfitUp />}
       {inView === "profitDown" && <GenericStats />}
       {inView === "generic" && <GenericStats />}
+      <div className="h-24"></div>
     </div>
   );
 };
