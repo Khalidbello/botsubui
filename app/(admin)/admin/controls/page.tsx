@@ -8,9 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 import {
   faClock,
+  faMoneyBill,
   faNoteSticky,
   faWifi,
 } from "@fortawesome/free-solid-svg-icons";
+import Payments from "@/components/admin-dashboard/controls/payments/payments";
 
 export default function Controls() {
   const router = useRouter();
@@ -19,6 +21,7 @@ export default function Controls() {
   const networkStatusBtRef = useRef<HTMLButtonElement | null>(null);
   const reportedIssuesBtRef = useRef<HTMLButtonElement | null>(null);
   const pendingTransactionsBtRef = useRef<HTMLButtonElement | null>(null);
+  const paymentBtRef = useRef<HTMLButtonElement | null>(null);
 
   // fucntion to handle change of view
   const changeView = (e: React.MouseEvent<HTMLButtonElement>, info: string) => {
@@ -44,7 +47,7 @@ export default function Controls() {
   return (
     <>
       <div className="w-full h-full pb-20">
-        <header className="w-full flex items-center justify-center gap-4 p-4">
+        <header className="w-full flex flex-wrap items-center justify-center gap-4 p-4 mb-5">
           <button
             ref={networkStatusBtRef}
             onClick={(e) => changeView(e, "networkStatus")}
@@ -80,6 +83,20 @@ export default function Controls() {
             Pending
             <FontAwesomeIcon icon={faClock} className="w-3 h-3 text-blue-600" />
           </button>
+          <span className="w-[2px] h-[2rem] bg-gray-300"></span>
+          <button
+            ref={paymentBtRef}
+            onClick={(e) => changeView(e, "payments")}
+            className={`flex items-center justify-center gap-2 h-full ${
+              inView === "payments" && "border-b-2 border-b-blue-300"
+            }`}
+          >
+            Payments
+            <FontAwesomeIcon
+              icon={faMoneyBill}
+              className="w-3 h-3 text-blue-600"
+            />
+          </button>
         </header>
 
         {inView === "networkStatus" && (
@@ -94,6 +111,7 @@ export default function Controls() {
         {inView === "pendingTransactions" && (
           <PendingTransactions url={url} router={router} />
         )}
+        {inView === "payments" && <Payments url={url} router={router} />}
       </div>
       <div className="h-24"></div>
     </>

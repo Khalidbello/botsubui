@@ -185,7 +185,7 @@ const FilterComponent: React.FC<FilterComponentProp> = ({
   setDateRange,
   getCurrentDate,
 }) => {
-  const [startDate, setStartDate] = useState("2024-04-01");
+  const [startDate, setStartDate] = useState(getCurrentDate());
   const [endDate, setEndDate] = useState(getCurrentDate());
 
   const handleFilter = () => {
@@ -200,7 +200,7 @@ const FilterComponent: React.FC<FilterComponentProp> = ({
   };
 
   return (
-    <div className="flex justify-start items-center flex-wrap md:flex-row md:items-center gap-x-4 gap-y-2">
+    <div className="flex justify-center items-center flex-wrap md:flex-row md:items-center gap-x-4 gap-y-2">
       <input
         type="date"
         value={startDate}
