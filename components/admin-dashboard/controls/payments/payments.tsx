@@ -14,6 +14,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxes, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import PaymentSearch from "./search";
 
 interface transactionType {
   id: string;
@@ -40,6 +41,17 @@ const Payments: React.FC<{
   const [paymentNumber, setPaymentNumber] = useState<number>(0);
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const [showError, setShowError] = useState<boolean>(false);
+  const [showSearch, setShowSearch] = useState<boolean>(false);
+  const searchbtRef = useRef<HTMLButtonElement | null>(null);
+
+  // function to handle show search
+  const handleShowSearch = () => {
+    if (searchbtRef.current) searchbtRef.current.style.opacity = "0.5";
+    setTimeout(() => {
+      if (searchbtRef.current) searchbtRef.current.style.opacity = "1";
+    }, 220);
+    setTimeout(() => setShowSearch(true), 240);
+  };
 
   // function to fetch payment lists
   const fetchPaymentLists = async () => {
@@ -141,13 +153,15 @@ const Payments: React.FC<{
       </div>
 
       <section className="flex flex-col items-center justify-center gap-y-6 fixed right-4 bottom-[6rem] rounded-full p-2 bg-blue-100 bg-opacity-50">
-        <button className="pt-3">
+        <button ref={searchbtRef} onClick={handleShowSearch} className="pt-3">
           <FontAwesomeIcon icon={faSearch} className="w-5 h-5 text-blue-600" />
         </button>
         <span className="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white">
           {paymentNumber}
         </span>
       </section>
+
+      {showSearch && <PaymentSearch payments={payments} show={setShowSearch} url={url} />}
     </div>
   );
 };

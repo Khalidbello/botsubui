@@ -40,7 +40,7 @@ const UnitTransfer: React.FC<{
         setShowError("");
         disableBt();
       } else {
-        setShowError("Custom hook failed");
+        setShowError(data.message);
         setShowSuccesful("");
       }
     } catch (err) {
