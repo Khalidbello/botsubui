@@ -1,13 +1,10 @@
 "use client";
 
-import Header from "@/components/admin-dashboard/header";
-import Transactions from "@/components/admin-dashboard/statistics/transaction-stats/transactions-stats";
-import Earnings from "@/components/admin-dashboard/statistics/earnings";
+import EarningsTrend from "@/components/admin-dashboard/statistics/earning-trend.tsx/earnings-trend";
 import ToDaysEarning from "@/components/admin-dashboard/statistics/todays-earning";
-import Loader from "@/components/admin-dashboard/loader";
 import Balances from "@/components/admin-dashboard/statistics/balances";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import EarningsStats from "@/components/admin-dashboard/statistics/transaction-stats/earning-stats";
 
 export default function Page() {
   const router = useRouter();
@@ -17,8 +14,8 @@ export default function Page() {
     <>
       <div className="px-1 md:mx-4">
         <ToDaysEarning url={url} router={router} />
-        <Earnings url={url} router={router} />
-        <Transactions url={url} router={router} />
+        <EarningsTrend url={url} router={router} />
+        <EarningsStats url={url} router={router} />
         <Balances url={url} router={router} />
       </div>
     </>

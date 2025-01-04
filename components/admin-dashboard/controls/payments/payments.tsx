@@ -1,9 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Loader2 from "@/components/admin-dashboard/loader2";
-import UnitPending from "./unit-payment";
-import Loader from "../../loader";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import UnitTransfer from "./unit-payment";
 import {
@@ -34,6 +31,7 @@ const Payments: React.FC<{
   url: string | undefined;
   router: AppRouterInstance;
 }> = ({ url, router }) => {
+  const [filterable, setFilterable] = useState<boolean>(false);
   const [dateRange, setDateRange] = useState<DateRangeType>({
     startDate: getCurrentDate(),
     endDate: getCurrentDate(),
@@ -44,8 +42,14 @@ const Payments: React.FC<{
   const [fetchingMore, setFetchingMore] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [showSearch, setShowSearch] = useState<boolean>(false);
-  const [pageNum, setPageNum] = useState<number>(1);
   const searchbtRef = useRef<HTMLButtonElement | null>(null);
+  let pageNum = 1;
+
+  // function to update fiterable
+  const updateFilterable = (filterable: boolean) => {
+    setFilterable(filterable);
+    //pageNum = 1;
+  };
 
   // function to handle show search
   const handleShowSearch = () => {
@@ -56,9 +60,15 @@ const Payments: React.FC<{
     setTimeout(() => setShowSearch(true), 240);
   };
 
+  // function to update date for filter, clear array and reset pageNum
+  const updateFilterDate = (startDate: any, endDate: any) => {
+    setShowLoader(true);
+    setDateRange({ startDate, endDate });
+    fetchPaymentLists(pageNum);
+  };
+
   // function to fetch payment lists
-  const fetchPaymentLists = async () => {
-    //setShowLoader(true);
+  const fetchPaymentLists = async (pageNum: number) => {
     setShowError(false);
     setFetchingMore(true);
 
@@ -74,7 +84,9 @@ const Payments: React.FC<{
         throw "Feching transacction list not sucesfull";
 
       const data = await response.json();
-      setPayments([...payments, ...data.data.transactions]);
+      pageNum === 1
+        ? setPayments(data.data.transactions)
+        : setPayments([...payments, ...data.data.transactions]);
       setPaymentNumber(data.data.page_info.total);
     } catch (err) {
       setShowError(true);
@@ -86,51 +98,48 @@ const Payments: React.FC<{
 
   // fucntion to initiate see more transfers
   const seeMoreTransfer = () => {
-    setPageNum(pageNum + 1);
+    pageNum++;
+    setTimeout(() => fetchPaymentLists(pageNum), 300);
   };
 
   useEffect(() => {
-    fetchPaymentLists();
+    setPayments([]);
+    setShowLoader(true);
+    pageNum = 1;
+    fetchPaymentLists(pageNum);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateRange, url, pageNum]);
+  }, [dateRange, url]);
 
-  if (showLoader) {
-    return (
-      <div className="h-full w-full">
+  return (
+    <div className="h-full rounded-xl px-4 py-4 pb-24 max-w-[80rem] md:mx-auto">
+      <div>
+        {" "}
         <FilterComponent
           setDateRange={setDateRange}
           getCurrentDate={getCurrentDate}
+          filterable={filterable}
+          updateFilterable={updateFilterable}
         />
-        <div className="flex flex-col justify-center gap-4 items-center h-[80%]">
-          <Loader2 h="h-[5rem]" />
-        </div>
       </div>
-    );
-  }
 
-  if (showError) {
-    return (
-      <div className="h-full w-full">
-        <FilterComponent
-          setDateRange={setDateRange}
-          getCurrentDate={getCurrentDate}
-        />
+      {/* to be shown when fetching if date rane is changed */}
+      {showLoader && (
+        <div className="h-[80%] flex justify-center items-center">
+          <LoadingAnimation h="h-[5rem]" />
+        </div>
+      )}
+
+      {/* to be shown if an error occurs */}
+      {showError && (
         <div className="flex flex-col justify-center gap-4 items-center h-[80%]">
-          <div className="text-sm text-center text-red-500 mt-5">
+          <p className="text-sm text-center text-red-500 mt-5">
             Sorry an error occured while fetching transfers
-          </div>
+          </p>
         </div>
-      </div>
-    );
-  }
+      )}
 
-  if (payments.length < 1) {
-    return (
-      <div className="h-full w-full">
-        <FilterComponent
-          setDateRange={setDateRange}
-          getCurrentDate={getCurrentDate}
-        />
+      {/* to be shown if payments is less than one */}
+      {payments.length < 1 && !showLoader && !showError && (
         <div className="flex flex-col justify-center gap-4 items-center h-[80%]">
           <Image
             alt={"search image"}
@@ -141,54 +150,57 @@ const Payments: React.FC<{
           />
           <h2>No Payment Found</h2>
         </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="h-auto rounded-xl px-2 py-4 pb-24 max-w-[80rem] md:mx-auto">
-      <div>
-        {" "}
-        <FilterComponent
-          setDateRange={setDateRange}
-          getCurrentDate={getCurrentDate}
-        />
-      </div>
-
-      <div className="flex justify-center flex-shrink items-start flex-wrap gap-x-8 gap-y-6 mt-8">
-        {payments.map((payment, index) => (
-          <UnitTransfer key={index} payment={payment} url={url} />
-        ))}
-      </div>
-
-      {/* see more bt */}
-      {paymentNumber > payments.length && (
-        <div className="mt-4 flex items-center justify-center">
-          {fetchingMore ? (
-            <LoadingAnimation h="h-[1.5rem]" />
-          ) : (
-            <button onClick={seeMoreTransfer} className="text-blue-400 text-sm">
-              see more..
-            </button>
-          )}
-        </div>
       )}
 
-      {/* side bar */}
-      <section className="flex flex-col items-center justify-center gap-y-6 fixed right-4 bottom-[6rem] rounded-full p-2 bg-blue-100 bg-opacity-50">
-        <button ref={searchbtRef} onClick={handleShowSearch} className="pt-3">
-          <FontAwesomeIcon icon={faSearch} className="w-5 h-5 text-blue-600" />
-        </button>
-        <span className="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center text-white">
-          {payments.length}
-        </span>
-        <span className="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white">
-          {paymentNumber}
-        </span>
-      </section>
+      {/* to be shown if everything is alright */}
+      {!showLoader && !showError && payments.length > 0 && (
+        <>
+          <div className="flex justify-center flex-shrink items-start flex-wrap gap-x-8 gap-y-6 mt-8">
+            {payments.map((payment, index) => (
+              <UnitTransfer key={index} payment={payment} url={url} />
+            ))}
+          </div>
 
-      {showSearch && (
-        <PaymentSearch payments={payments} show={setShowSearch} url={url} />
+          {/* see more bt */}
+          {paymentNumber > payments.length && (
+            <div className="mt-4 flex items-center justify-center">
+              {fetchingMore ? (
+                <LoadingAnimation h="h-[1.5rem]" />
+              ) : (
+                <button
+                  onClick={seeMoreTransfer}
+                  className="text-blue-400 text-sm"
+                >
+                  see more..
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* side bar */}
+          <section className="flex flex-col items-center justify-center gap-y-6 fixed right-4 bottom-[6rem] rounded-full p-2 bg-blue-100 bg-opacity-50">
+            <button
+              ref={searchbtRef}
+              onClick={handleShowSearch}
+              className="pt-3"
+            >
+              <FontAwesomeIcon
+                icon={faSearch}
+                className="w-5 h-5 text-blue-600"
+              />
+            </button>
+            <span className="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center text-white">
+              {payments.length}
+            </span>
+            <span className="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white">
+              {paymentNumber}
+            </span>
+          </section>
+
+          {showSearch && (
+            <PaymentSearch payments={payments} show={setShowSearch} url={url} />
+          )}
+        </>
       )}
     </div>
   );

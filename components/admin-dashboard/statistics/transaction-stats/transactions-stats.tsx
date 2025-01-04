@@ -26,113 +26,6 @@ interface DateRangeType {
   endDate: string;
 }
 
-export default function Earnings({
-  url,
-  router,
-}: {
-  url: string | undefined;
-  router: AppRouterInstance;
-}) {
-  const [showError, setShowError] = useState<boolean>(false);
-  const [data, setData] = useState<mockdataType[]>([]);
-  const [dataFetched, setDataFetched] = useState<boolean>(false);
-  const [dateRange, setDateRange] = useState<DateRangeType>({
-    startDate: "2024-04-01",
-    endDate: getCurrentDate(),
-  });
-
-  useEffect(() => {
-    setDataFetched(false);
-    // Fetch data from API
-    fetch(`${url}/statistics/${dateRange.startDate}/${dateRange.endDate}`, {
-      credentials: "include",
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(
-            "in full statisitics.....................",
-            2000000000000000000000
-          );
-          return response.json();
-        } else if (response.status === 401) {
-          console.log("unauthorized access.....");
-          router.push("/admin-login");
-        } else {
-          throw "Something went wron trying to fetch statisics";
-        }
-      })
-      .then((data) => {
-        const newData: mockdataType[] = [
-          {
-            title: "Total transactions",
-            value: data.total,
-            type: "",
-          },
-          {
-            title: "Total successful transactions",
-            value: data.succcessful,
-            type: "",
-          },
-          {
-            title: "Total pending transactions",
-            value: data.pending,
-            type: "",
-          },
-          {
-            title: "Total profit",
-            value: data.profit,
-            type: "",
-          },
-          {
-            title: "Average transactiosns per day",
-            value: data.average,
-            type: "",
-          },
-        ];
-        setData(newData);
-        setDataFetched(true);
-      })
-      .catch((error) => {
-        console.log("an error occurred while trying to fetch data", error);
-        setDataFetched(true);
-        setShowError(true);
-      });
-  }, [dateRange, router, url]);
-
-  return (
-    <div className="mt-16 mx-6 rounded-lg border-[1px] border-blue-300  px-6 py-8 xl:max-w-[70rem] xl:mx-auto">
-      <div className="font-semibold mb-2 flex justify-between items-start flex-wrap flex-col md:flex-row md:items-center">
-        <span className="mb-2">Transactions </span>
-        <FilterComponent
-          setDateRange={setDateRange}
-          getCurrentDate={getCurrentDate}
-        />
-      </div>
-      {showError ? (
-        <div className="text-red-500 text-sm text-center">
-          An error occured... <br /> please try reloading page
-        </div>
-      ) : (
-        <div className="flex justify-around flex-col screenRow:flex-row flex-wrap  items-stretch gap-6 mt-8">
-          {dataFetched ? (
-            data.map((ele: mockdataType, index: number) => (
-              <Another
-                key={index}
-                router={router}
-                title={ele.title}
-                value={ele.value}
-                type={ele.type}
-              />
-            ))
-          ) : (
-            <Loader2 h="h-[4rem]" />
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
 interface TransactionsFormerProps {
   title: string;
   value: number;
@@ -179,11 +72,15 @@ const Another: React.FC<TransactionsFormerProps> = ({
 interface FilterComponentProp {
   setDateRange: React.Dispatch<React.SetStateAction<DateRangeType>>;
   getCurrentDate: Function;
+  filterable: boolean;
+  updateFilterable: (filterable: boolean) => void;
 }
 
 const FilterComponent: React.FC<FilterComponentProp> = ({
   setDateRange,
   getCurrentDate,
+  filterable,
+  updateFilterable,
 }) => {
   const [startDate, setStartDate] = useState(getCurrentDate());
   const [endDate, setEndDate] = useState(getCurrentDate());
@@ -205,7 +102,10 @@ const FilterComponent: React.FC<FilterComponentProp> = ({
         type="date"
         value={startDate}
         max={getCurrentDate()} // Set current date as the maximum date
-        onChange={(e) => setStartDate(e.target.value)}
+        onChange={(e) => {
+          updateFilterable(true);
+          setStartDate(e.target.value);
+        }}
         className="border border-gray-300 rounded-md px-3 py-2 text-xs"
       />
       <span className="text-xs">to</span>
@@ -213,12 +113,18 @@ const FilterComponent: React.FC<FilterComponentProp> = ({
         type="date"
         value={endDate}
         max={getCurrentDate()} // Set current date as the maximum date
-        onChange={(e) => setEndDate(e.target.value)}
+        onChange={(e) => {
+          updateFilterable(true);
+          setEndDate(e.target.value);
+        }}
         className="border border-gray-300 rounded-md px-3 py-2 text-xs"
       />
       <button
         onClick={handleFilter}
-        className="bg-blue-500 text-white px-4 py-1 rounded-full text-xs"
+        className={`bg-blue-500 text-white px-4 py-1 rounded-full text-xs ${
+          !filterable ? "opacity-40" : "opacity-100"
+        }`}
+        disabled={!filterable}
       >
         Filter
       </button>

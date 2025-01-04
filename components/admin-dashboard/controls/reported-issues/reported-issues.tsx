@@ -21,7 +21,6 @@ const ReportedIssues: React.FC<{
   router: AppRouterInstance;
 }> = ({ url, router }) => {
   const [issues, setIssues] = useState<Issue[]>([]);
-  const [numberOfIssues, setNumberOfIssues] = useState<number>(0);
   const [showMoreIssueBt, setShowMoreIssueBt] = useState<boolean>(true);
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const [fetchingMore, setFetchingMore] = useState<boolean>(false);
@@ -56,57 +55,62 @@ const ReportedIssues: React.FC<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagging, url]);
 
+  if (showError) {
+    return (
+      <div className="w-full h-[80%] flex items-center justify-center">
+        <p className="text-sm text-red-500 text-center">
+          An error occured trying to fetch issues
+        </p>
+      </div>
+    );
+  }
+
+  if (showLoader) {
+    return (
+      <div className="w-full h-[80%] flex items-center justify-center">
+        <Loader2 h="h-[4rem]" />
+      </div>
+    );
+  }
+
+  if (issues.length < 1) {
+    return (
+      <div className="flex flex-col justify-center gap-4 items-center h-[80%] w-full">
+        <Image
+          alt={"search image"}
+          src={"/search-img.jpeg"}
+          width={500}
+          height={500}
+          className="h-[7rem] object-contain"
+        />
+        <h2>No issues find</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="relative mt-10 h-full rounded-xl px-2 py-4 pb-20 max-w-[70rem] mx-4 md:mx-auto">
-      {showError ? (
-        <div className="text-sm text-red-500 text-center">
-          An error occured trying to fetch issues
-        </div>
-      ) : showLoader ? (
-        <Loader2 h="h-[4rem]" />
-      ) : (
-        <>
-          <div className="flex flex-wrap justify-center items-stretch gap-x-6 gap-y-6">
-            {issues.length > 0 ? (
-              issues.map((issue, index) => (
-                <UnitIssue
-                  key={index}
-                  issue={issue}
-                  url={url}
-                  router={router}
-                />
-              ))
-            ) : (
-              <div className="flex flex-col justify-center gap-4 items-center h-[80%] w-full">
-                <Image
-                  alt={"search image"}
-                  src={"/search-img.jpeg"}
-                  width={500}
-                  height={500}
-                  className="h-[7rem] object-contain"
-                />
-                <h2>No issues find</h2>
-              </div>
-            )}
-          </div>
+      <div className="flex flex-shrink-0 flex-wrap justify-center items-stretch gap-x-6 gap-y-6 h-full">
+        {issues.map((issue, index) => (
+          <UnitIssue key={index} issue={issue} url={url} router={router} />
+        ))}
+      </div>
 
-          {issues.length > 0 &&
-            showMoreIssueBt &&
-            (fetchingMore ? (
-              <LoadingAnimation h="h-[1rem]" />
-            ) : (
-              <div
-                onClick={() => setPagging(pagging + 1)}
-                className="text-center text-blue-500"
-              >
-                {" "}
-                <button>see more report</button>
-              </div>
-            ))}
-        </>
-      )}
+      {showMoreIssueBt &&
+        (fetchingMore ? (
+          <LoadingAnimation h="h-[1rem]" />
+        ) : (
+          <div
+            onClick={() => setPagging(pagging + 1)}
+            className="text-center text-blue-500"
+          >
+            {" "}
+            <button>see more reports...</button>
+          </div>
+        ))}
+
       <span className="fixed flex justify-center items-center bottom-20 right-8 w-16 h-16 rounded-full bg-blue-600 text-white">
-        {numberOfIssues}
+        {issues.length}
       </span>
     </div>
   );

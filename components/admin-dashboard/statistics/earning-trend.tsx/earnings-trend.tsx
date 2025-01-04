@@ -1,10 +1,10 @@
-import Graph from "@/components/admin-dashboard/statistics/graph";
+import Graph from "@/components/admin-dashboard/statistics/earning-trend.tsx/graph";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loader2 from "@/components/admin-dashboard/loader2";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-export default function Earnings({
+export default function EarningsTrend({
   url,
   router,
 }: {
