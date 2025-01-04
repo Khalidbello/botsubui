@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxes, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import PaymentSearch from "./search";
+import LoadingAnimation from "@/components/admin-dashboard/loader2";
 
 interface transactionType {
   id: string;
@@ -40,8 +41,10 @@ const Payments: React.FC<{
   const [payments, setPayments] = useState<any[]>([]);
   const [paymentNumber, setPaymentNumber] = useState<number>(0);
   const [showLoader, setShowLoader] = useState<boolean>(true);
+  const [fetchingMore, setFetchingMore] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [showSearch, setShowSearch] = useState<boolean>(false);
+  const [pageNum, setPageNum] = useState<number>(1);
   const searchbtRef = useRef<HTMLButtonElement | null>(null);
 
   // function to handle show search
@@ -55,12 +58,13 @@ const Payments: React.FC<{
 
   // function to fetch payment lists
   const fetchPaymentLists = async () => {
-    setShowLoader(true);
+    //setShowLoader(true);
     setShowError(false);
+    setFetchingMore(true);
 
     try {
       const response = await fetch(
-        `${url}/list-transactions/${dateRange.startDate}/${dateRange.endDate}/successful`,
+        `${url}/list-transactions/${dateRange.startDate}/${dateRange.endDate}/successful/${pageNum}`,
         {
           credentials: "include",
         }
@@ -70,20 +74,25 @@ const Payments: React.FC<{
         throw "Feching transacction list not sucesfull";
 
       const data = await response.json();
-      setPayments(data.data.transactions);
+      setPayments([...payments, ...data.data.transactions]);
       setPaymentNumber(data.data.page_info.total);
     } catch (err) {
       setShowError(true);
     } finally {
       setShowLoader(false);
+      setFetchingMore(false);
     }
   };
 
+  // fucntion to initiate see more transfers
+  const seeMoreTransfer = () => {
+    setPageNum(pageNum + 1);
+  };
+
   useEffect(() => {
-    setShowLoader(true);
     fetchPaymentLists();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateRange, url]);
+  }, [dateRange, url, pageNum]);
 
   if (showLoader) {
     return (
@@ -152,16 +161,35 @@ const Payments: React.FC<{
         ))}
       </div>
 
+      {/* see more bt */}
+      {paymentNumber > payments.length && (
+        <div className="mt-4 flex items-center justify-center">
+          {fetchingMore ? (
+            <LoadingAnimation h="h-[1.5rem]" />
+          ) : (
+            <button onClick={seeMoreTransfer} className="text-blue-400 text-sm">
+              see more..
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* side bar */}
       <section className="flex flex-col items-center justify-center gap-y-6 fixed right-4 bottom-[6rem] rounded-full p-2 bg-blue-100 bg-opacity-50">
         <button ref={searchbtRef} onClick={handleShowSearch} className="pt-3">
           <FontAwesomeIcon icon={faSearch} className="w-5 h-5 text-blue-600" />
         </button>
+        <span className="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center text-white">
+          {payments.length}
+        </span>
         <span className="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white">
           {paymentNumber}
         </span>
       </section>
 
-      {showSearch && <PaymentSearch payments={payments} show={setShowSearch} url={url} />}
+      {showSearch && (
+        <PaymentSearch payments={payments} show={setShowSearch} url={url} />
+      )}
     </div>
   );
 };

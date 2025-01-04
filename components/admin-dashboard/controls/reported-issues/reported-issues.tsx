@@ -5,6 +5,7 @@ import UnitIssue from "@/components/admin-dashboard/controls/reported-issues/uni
 import Loader2 from "@/components/admin-dashboard/loader2";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import LoadingAnimation from "@/components/admin-dashboard/loader2";
+import Image from "next/image";
 
 interface Issue {
   id: string;
@@ -76,8 +77,15 @@ const ReportedIssues: React.FC<{
                 />
               ))
             ) : (
-              <div className="text-xl text-purple-500 text-center">
-                No Reported Issues
+              <div className="flex flex-col justify-center gap-4 items-center h-[80%] w-full">
+                <Image
+                  alt={"search image"}
+                  src={"/search-img.jpeg"}
+                  width={500}
+                  height={500}
+                  className="h-[7rem] object-contain"
+                />
+                <h2>No issues find</h2>
               </div>
             )}
           </div>
