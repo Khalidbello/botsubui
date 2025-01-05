@@ -11,11 +11,18 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import LoadingAnimation from "../loader2";
 
 const GenericStats = () => {
+  const [filterable, setFilterable] = useState<boolean>(false);
   const [dateRange, setDateRange] = useState<DateRangeType>({
-    startDate: "1-11-2024",
+    startDate: getCurrentDate(),
     endDate: getCurrentDate(),
-  });
+  }); // to hold date range for search
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // function to update fiterable
+  const updateFilterable = (filterable: boolean) => {
+    setFilterable(filterable);
+    //pageNum = 1;
+  };
 
   // funtion to fetch data
   const fetchData = async () => {
@@ -44,6 +51,8 @@ const GenericStats = () => {
         <FilterComponent
           setDateRange={setDateRange}
           getCurrentDate={getCurrentDate}
+          filterable={filterable}
+          updateFilterable={updateFilterable}
         />
       </div>
       <div className="flex justify-around flex-col screenRow:flex-row flex-wrap items-stretch gap-6 mt-4 p-4">
