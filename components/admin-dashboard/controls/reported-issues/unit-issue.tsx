@@ -30,7 +30,10 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
     fetch(`${url}/close-issue/${issue.id}/${issue.reporterId}`, {
       credentials: "include",
       method: "POST",
-      body: JSON.stringify({ issue: issue.description }),
+      body: JSON.stringify({
+        issue: issue.description,
+        platfrom: issue.platform,
+      }),
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
@@ -65,7 +68,7 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
 
     const postData = {
       reporterId: issue.reporterId,
-      platformType: issue.platformType,
+      platform: issue.platform,
       response: response,
       id: issue.id,
     };
@@ -106,6 +109,10 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
 
   return (
     <div className="w-[24rem] max-w-xl flex-shrink-0 flex-1 bg-gray-50 rounded-lg p-4 mb-2">
+      <p className="font-normal">
+        <span className="font-semibold">platform: </span>
+        {issue.platform}
+      </p>
       <p className="mb-2 text-sm">
         <span className="font-semibold">Description: </span>
         {issue.description}
@@ -146,7 +153,11 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
       </div>
 
       <div className="text-right space-x-5 mt-4 flex items-center justify-end gap-x-2 text-xs">
-        <TogggleBotResponse senderId={issue.reporterId} url={url} />
+        <TogggleBotResponse
+          senderId={issue.reporterId}
+          url={url}
+          platform={issue.platform}
+        />
         <button
           ref={closeBt}
           className="bg-red-50 text-red-600 rounded-full px-6 py-2"

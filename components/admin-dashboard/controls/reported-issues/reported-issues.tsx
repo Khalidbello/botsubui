@@ -12,7 +12,7 @@ interface Issue {
   description: string;
   date: string;
   reporterId: string;
-  platformType: string;
+  platform: string;
   status: boolean;
 }
 

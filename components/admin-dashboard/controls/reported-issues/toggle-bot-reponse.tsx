@@ -4,11 +4,13 @@ import Loader2 from "@/components/admin-dashboard/loader2";
 interface TogggleBotResponseProps {
   url: string | undefined;
   senderId: string;
+  platform: string;
 }
 
 const TogggleBotResponse: React.FC<TogggleBotResponseProps> = ({
   url,
   senderId,
+  platform,
 }) => {
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const [isChecked, setIsChecked] = useState(false);
@@ -16,11 +18,14 @@ const TogggleBotResponse: React.FC<TogggleBotResponseProps> = ({
   // fucntiion to fetch current state of auto retry from server
   const fetchAutoRetryStatus = async () => {
     try {
-      const response = await fetch(`${url}/get-bot-response/${senderId}`, {
-        method: "GET",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(
+        `${url}/get-bot-response/${senderId}/${platform}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (response.status !== 200) throw "Something went wrong";
 
@@ -45,7 +50,7 @@ const TogggleBotResponse: React.FC<TogggleBotResponseProps> = ({
         headers: { "Content-Type": "application/json" },
         method: "POST",
         credentials: "include",
-        body: JSON.stringify({ setTo: !isChecked }),
+        body: JSON.stringify({ setTo: !isChecked, platform: platform }),
       });
 
       if (response.status !== 200)
