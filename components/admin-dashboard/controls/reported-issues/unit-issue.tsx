@@ -32,7 +32,7 @@ const UnitIssue: React.FC<UnitIssueProp> = ({ issue, url, router }) => {
       method: "POST",
       body: JSON.stringify({
         issue: issue.description,
-        platfrom: issue.platform,
+        platform: issue.platform,
       }),
       headers: { "Content-Type": "application/json" },
     })
