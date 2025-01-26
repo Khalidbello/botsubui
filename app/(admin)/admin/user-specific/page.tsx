@@ -1,17 +1,18 @@
 "use client";
 
-import GenericStats from "@/components/admin-dashboard/user-specific-stats/generic-stats";
+import UsersStatistics from "@/components/admin-dashboard/user-specific-stats/generic-stats";
 import ProfitUp from "@/components/admin-dashboard/user-specific-stats/profit-up";
 import {
   faArrowDown,
   faArrowUp,
+  faChartBar,
   faGlobe,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 
 const Page = () => {
-  const [inView, setInView] = useState<string>("profitUp");
+  const [inView, setInView] = useState("usersStats");
   const profitUpBtRef = useRef<HTMLButtonElement | null>(null);
   const profitDownBtRef = useRef<HTMLButtonElement | null>(null);
   const genericBtRef = useRef<HTMLButtonElement | null>(null);
@@ -41,24 +42,13 @@ const Page = () => {
     <div className="w-full h-full">
       <header className="w-full flex items-center justify-center gap-4 p-4">
         <button
-          ref={profitUpBtRef}
-          onClick={(e) => changeView(e, "profitUp")}
-          className={`flex items-center justify-center gap-2 h-full ${
-            inView === "profitUp" && "border-b-2 border-b-blue-300"
-          }`}
-        >
-          Profits
-          <FontAwesomeIcon icon={faArrowUp} className="w-3 h-3 text-blue-600" />
-        </button>
-        <span className="w-[2px] h-[2rem] bg-gray-300"></span>
-        <button
           ref={profitDownBtRef}
-          onClick={(e) => changeView(e, "profitDown")}
+          onClick={(e) => changeView(e, "usersStats")}
           className={`flex items-center justify-center gap-2 h-full ${
-            inView === "profitDown" && "border-b-2 border-b-blue-300"
+            inView === "usersStats" && "border-b-2 border-b-blue-300"
           }`}
         >
-          Profits
+          Statistics
           <FontAwesomeIcon
             icon={faArrowDown}
             className="w-3 h-3 text-blue-600"
@@ -67,19 +57,21 @@ const Page = () => {
         <span className="w-[2px] h-[2rem] bg-gray-300"></span>
         <button
           ref={genericBtRef}
-          onClick={(e) => changeView(e, "generic")}
+          onClick={(e) => changeView(e, "charts")}
           className={`flex items-center justify-center gap-2 h-full ${
-            inView === "generic" && "border-b-2 border-b-blue-300"
+            inView === "charts" && "border-b-2 border-b-blue-300"
           }`}
         >
-          Generic
-          <FontAwesomeIcon icon={faGlobe} className="w-3 h-3 text-blue-600" />
+          Charts
+          <FontAwesomeIcon
+            icon={faChartBar}
+            className="w-3 h-3 text-blue-600"
+          />
         </button>
       </header>
 
-      {inView === "profitUp" && <ProfitUp />}
-      {inView === "profitDown" && <GenericStats />}
-      {inView === "generic" && <GenericStats />}
+      {inView === "usersStats" && <UsersStatistics />}
+      {inView === "charts" && <UsersStatistics />}
       <div className="h-24"></div>
     </div>
   );
