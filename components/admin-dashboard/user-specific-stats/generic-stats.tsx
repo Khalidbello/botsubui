@@ -93,7 +93,7 @@ const UsersStatistics = () => {
   }, [dateRange]);
 
   return (
-    <div className="w-full h-full pb-20">
+    <div className="w-full h-full">
       <div className="w-full flex items-center justify-center mt-6">
         <FilterComponent
           setDateRange={setDateRange}
@@ -274,6 +274,7 @@ const UsersStatistics = () => {
           </>
         )}
       </div>
+      <div className="h-[10rem] w-full bg-white"></div>
     </div>
   );
 };

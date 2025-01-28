@@ -39,7 +39,7 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full overflow-y-auto">
       <header className="w-full flex items-center justify-center gap-4 p-4">
         <button
           ref={profitDownBtRef}
@@ -72,7 +72,6 @@ const Page = () => {
 
       {inView === "usersStats" && <UsersStatistics />}
       {inView === "charts" && <UsersStatistics />}
-      <div className="h-[30rem] w-full"></div>
     </div>
   );
 };

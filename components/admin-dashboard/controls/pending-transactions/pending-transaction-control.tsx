@@ -90,6 +90,7 @@ const PendingTransactions: React.FC<{
           )}
         </>
       )}
+      <div className="h-[10rem] w-full"></div>
     </div>
   );
 };

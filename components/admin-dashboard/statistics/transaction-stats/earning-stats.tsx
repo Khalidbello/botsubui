@@ -55,7 +55,7 @@ export default function EarningsStats({
       );
 
       if (response.status === 401) return router.push("/admin-login");
-      if (response.status === 200) throw "An error occured fetchnig statistics";
+      if (response.status !== 200) throw "An error occured fetchnig statistics";
 
       updateFilterable(false);
       const data = await response.json();
@@ -64,7 +64,7 @@ export default function EarningsStats({
     } catch (err) {
       console.log("an error occurred while trying to fetch data", err);
       setDataFetched(true);
-      //setShowError(true);
+      setShowError(true);
     }
   };
 

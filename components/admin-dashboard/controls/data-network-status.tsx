@@ -103,10 +103,9 @@ export default function DataNetworkStatus({
   }, [showLoader, url]);
 
   return (
-    <div className="mt-10 flex flex-col items-center justify-start screen1:justify-center  gap-y-20 h-[80%] px-6 py-4 max-w-xl mx-4 screen1:mx-auto">
+    <div className="mt-10 px-6 py-4 max-w-xl mx-4 screen1:mx-auto">
       {showError ? (
         <div className="text-sm text-red-500 text-center">
-          {" "}
           Sorry an error occured... <br /> pls try reloading page
         </div>
       ) : showLoader ? (
@@ -137,7 +136,7 @@ export default function DataNetworkStatus({
             ))}
           </div>
 
-          <div className="w-full max-w-xl border-[1px] border-blue-300 p-6 rounded-xl">
+          <div className="w-full max-w-xl border-[1px] border-blue-300 p-6 rounded-xl mt-16 mb-20">
             {networks.map((network, index) => (
               <p
                 key={index}
@@ -150,9 +149,9 @@ export default function DataNetworkStatus({
           </div>
 
           <FundComponent url={url} />
-          <div className="h-[30rem] w-full"></div>
         </>
       )}
+      <div className="h-[10rem] w-full"></div>
     </div>
   );
 }

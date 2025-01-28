@@ -42,6 +42,9 @@ const Payments: React.FC<{
   const [fetchingMore, setFetchingMore] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [showSearch, setShowSearch] = useState<boolean>(false);
+  const [searchEmail, setSearchEmail] = useState<string>("");
+  const [emailfetch, setEmailFetch] = useState<boolean>(false); // to trigger useEffect on email search Bt click
+  const [emailSearchBtActive, setemailSearchBtActive] = useState<boolean>(true); // to disable and enable email search bt approriately
   const searchbtRef = useRef<HTMLButtonElement | null>(null);
   let pageNum = 1;
 
@@ -60,13 +63,6 @@ const Payments: React.FC<{
     setTimeout(() => setShowSearch(true), 240);
   };
 
-  // function to update date for filter, clear array and reset pageNum
-  const updateFilterDate = (startDate: any, endDate: any) => {
-    setShowLoader(true);
-    setDateRange({ startDate, endDate });
-    fetchPaymentLists(pageNum);
-  };
-
   // function to fetch payment lists
   const fetchPaymentLists = async (pageNum: number) => {
     setShowError(false);
@@ -74,7 +70,9 @@ const Payments: React.FC<{
 
     try {
       const response = await fetch(
-        `${url}/list-transactions/${dateRange.startDate}/${dateRange.endDate}/successful/${pageNum}`,
+        `${url}/list-transactions/${dateRange.startDate}/${
+          dateRange.endDate
+        }/successful/${pageNum}/${searchEmail || null}`,
         {
           credentials: "include",
         }
@@ -88,6 +86,8 @@ const Payments: React.FC<{
         ? setPayments(data.data.transactions)
         : setPayments([...payments, ...data.data.transactions]);
       setPaymentNumber(data.data.page_info.total);
+      setemailSearchBtActive(true); // disable search email bt
+      updateFilterable(false); // dsiable datefilter serach bt
     } catch (err) {
       setShowError(true);
     } finally {
@@ -105,21 +105,46 @@ const Payments: React.FC<{
   useEffect(() => {
     setPayments([]);
     setShowLoader(true);
-    pageNum = 1;
     fetchPaymentLists(pageNum);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateRange, url]);
+  }, [dateRange, url, emailfetch]);
 
   return (
     <div className="h-full rounded-xl px-4 py-4 pb-24 max-w-[80rem] md:mx-auto">
-      <div>
-        {" "}
+      <div className="mx-auto max-w-[35rem] mb-4">
         <FilterComponent
           setDateRange={setDateRange}
           getCurrentDate={getCurrentDate}
           filterable={filterable}
           updateFilterable={updateFilterable}
         />
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="flex items-center gap-x-2 my-3"
+        >
+          <input
+            value={searchEmail}
+            onChange={(e) => {
+              e.stopPropagation();
+              setSearchEmail(e.currentTarget.value);
+              setemailSearchBtActive(false);
+            }}
+            type="text"
+            placeholder="Email to search"
+            className="px-4 py-3 bg-gray-100 rounded-full w-full"
+          />
+          <button
+            className={`rounded-full px-6 py-2 text-white bg-blue-500 ${
+              emailSearchBtActive && "bg-opacity-60"
+            }`}
+            onClick={() => {
+              setEmailFetch(!emailfetch);
+            }}
+            disabled={emailSearchBtActive}
+          >
+            Search
+          </button>
+        </form>
       </div>
 
       {/* to be shown when fetching if date rane is changed */}
@@ -200,6 +225,7 @@ const Payments: React.FC<{
           {showSearch && (
             <PaymentSearch payments={payments} show={setShowSearch} url={url} />
           )}
+          <div className="h-[15rem] w-full"></div>
         </>
       )}
     </div>

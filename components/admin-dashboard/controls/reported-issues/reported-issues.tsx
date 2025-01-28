@@ -89,7 +89,7 @@ const ReportedIssues: React.FC<{
   }
 
   return (
-    <div className="relative mt-10 h-full rounded-xl px-2 py-4 pb-20 max-w-[70rem] mx-4 md:mx-auto">
+    <div className="relative mt-10 rounded-xl px-2 py-4 pb-20 max-w-[70rem] mx-4 md:mx-auto">
       <div className="flex flex-shrink-0 flex-wrap justify-center items-stretch gap-x-6 gap-y-6 h-full">
         {issues.map((issue, index) => (
           <UnitIssue key={index} issue={issue} url={url} router={router} />
@@ -112,6 +112,7 @@ const ReportedIssues: React.FC<{
       <span className="fixed flex justify-center items-center bottom-20 right-8 w-16 h-16 rounded-full bg-blue-600 text-white">
         {issues.length}
       </span>
+      <div className="h-[10rem] w-full"></div>
     </div>
   );
 };

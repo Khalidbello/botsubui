@@ -46,7 +46,7 @@ export default function Controls() {
 
   return (
     <>
-      <div className="w-full h-full pb-20">
+      <div className="w-full h-full">
         <header className="w-full flex flex-wrap items-center justify-center gap-4 p-4 mb-5">
           <button
             ref={networkStatusBtRef}
@@ -102,18 +102,17 @@ export default function Controls() {
         {inView === "networkStatus" && (
           <DataNetworkStatus url={url} router={router} />
         )}
-        {/* {inView === "reportedIssues" && (
-        <TransactionSearch url={url} router={router} />
-      )} */}
+
         {inView === "reportedIssues" && (
           <ReportedIssues url={url} router={router} />
         )}
+
         {inView === "pendingTransactions" && (
           <PendingTransactions url={url} router={router} />
         )}
+
         {inView === "payments" && <Payments url={url} router={router} />}
       </div>
-      <div className="h-24"></div>
     </>
   );
 }
