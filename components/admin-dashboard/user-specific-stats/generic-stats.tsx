@@ -65,6 +65,8 @@ const UsersStatistics = () => {
 
   // funtion to fetch data
   const fetchData = async () => {
+    setIsLoading(true);
+
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/robust-users-statistics/${dateRange.startDate}/${dateRange.endDate}`,
@@ -115,7 +117,7 @@ const UsersStatistics = () => {
                 className="w-8 text-blue-400 mr-4"
               />
               <div>
-                <div className="text-xl">{data.totalProfi.toFixed(2) }</div>
+                <div className="text-xl">{data.totalProfi.toFixed(2)}</div>
                 <div className="text-gray-600">Total profit</div>
               </div>
             </div>
@@ -151,7 +153,9 @@ const UsersStatistics = () => {
                 className="w-8 text-blue-500 mr-4"
               />
               <div>
-                <div className="text-xl">{data.averageProfitPerUser.toFixed(2) }</div>
+                <div className="text-xl">
+                  {data.averageProfitPerUser.toFixed(2)}
+                </div>
                 <div className="text-gray-600">Average profit per user</div>
               </div>
             </div>
@@ -162,7 +166,9 @@ const UsersStatistics = () => {
                 className="w-8 text-blue-500 mr-4"
               />
               <div>
-                <div className="text-xl">{data.averageTransactionPerUser.toFixed(2) }</div>
+                <div className="text-xl">
+                  {data.averageTransactionPerUser.toFixed(2)}
+                </div>
                 <div className="text-gray-600">
                   Average transaction per user
                 </div>
@@ -176,7 +182,7 @@ const UsersStatistics = () => {
               />
               <div>
                 <div className="text-xl">
-                  {data.averageProfitPerTransaction.toFixed(2) }
+                  {data.averageProfitPerTransaction.toFixed(2)}
                 </div>
                 <div className="text-gray-600">
                   Average profit per transaction
@@ -192,7 +198,9 @@ const UsersStatistics = () => {
               <div>
                 <div className="text-xl">
                   {data.maxProfitPerUser5.map((ele: any, index: number) => {
-                    return <span key={index}>{ele.maxProfit.toFixed(2) }, </span>;
+                    return (
+                      <span key={index}>{ele.maxProfit.toFixed(2)}, </span>
+                    );
                   })}
                 </div>
                 <div className="text-gray-600">Maximum profitper user</div>
@@ -207,7 +215,9 @@ const UsersStatistics = () => {
               <div>
                 <div className="text-xl">
                   {data.minProfitPerUser5.map((ele: any, index: number) => {
-                    return <span key={index}>{ele.minProfit.toFixed(2) }, </span>;
+                    return (
+                      <span key={index}>{ele.minProfit.toFixed(2)}, </span>
+                    );
                   })}
                 </div>
                 <div className="text-gray-600">
@@ -225,7 +235,11 @@ const UsersStatistics = () => {
                 <div className="text-xl">
                   {data.maxNumOfTransactiosnPerUser5.map(
                     (ele: any, index: number) => {
-                      return <span key={index}>{ele.transactionCount.toFixed(2) }, </span>;
+                      return (
+                        <span key={index}>
+                          {ele.transactionCount.toFixed(2)},{" "}
+                        </span>
+                      );
                     }
                   )}
                 </div>
@@ -244,7 +258,11 @@ const UsersStatistics = () => {
                 <div className="text-xl">
                   {data.minNumOfTransactiosnPerUser5.map(
                     (ele: any, index: number) => {
-                      return <span key={index}>{ele.transactionCount.toFixed(2) }, </span>;
+                      return (
+                        <span key={index}>
+                          {ele.transactionCount.toFixed(2)},{" "}
+                        </span>
+                      );
                     }
                   )}
                 </div>

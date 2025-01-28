@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Loader2 from "@/components/admin-dashboard/loader2";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import FundComponent from "./data-wallet-funder";
 
 interface networksType {
   name: string;
@@ -135,6 +136,7 @@ export default function DataNetworkStatus({
               </div>
             ))}
           </div>
+
           <div className="w-full max-w-xl border-[1px] border-blue-300 p-6 rounded-xl">
             {networks.map((network, index) => (
               <p
@@ -146,6 +148,9 @@ export default function DataNetworkStatus({
               </p>
             ))}
           </div>
+
+          <FundComponent url={url} />
+          <div className="h-[30rem] w-full"></div>
         </>
       )}
     </div>
