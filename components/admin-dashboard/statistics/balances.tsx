@@ -54,75 +54,73 @@ export default function Balances({
   }, [url]);
 
   return (
-    <div className="mb-10 mt-16 m-6 rounded-lg border-[1px] border-blue-300 px-4 py-8 xl:max-w-[70rem] xl:mx-auto">
-      <div className="font-semibold">Balances</div>
-      <div className="flex justify-around flex-col screenRow:flex-row items-stretch flex-wrap  gap-6 mt-8">
-        {!showErrorOccured && !dataFetched && <Loader2 h="h-[4rem]" />}
+    <div className="max-w-[60rem] mx-auto px-6 py-8 rounded-lg border border-blue-300">
+      <div className="font-semibold mb-4">Balances</div>
+      {!showErrorOccured && !dataFetched && <Loader2 h="h-[4rem]" />}
 
-        {showErrorOccured && (
-          <div className="text-center text-red-400">
-            Sorry and error occurred <br /> Please try reloading page{" "}
+      {showErrorOccured && (
+        <div className="text-center text-red-400 py-6">
+          Sorry and error occurred <br /> Please try reloading page{" "}
+        </div>
+      )}
+
+      {dataFetched && !showErrorOccured && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6">
+          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+            <FontAwesomeIcon
+              icon={faNairaSign}
+              className="text-xl text-green-600 mr-4"
+            />
+            <div>
+              <div className="text-lg font-semibold">
+                {balances.dataWalletBalance}
+              </div>
+              <div className="text-gray-600">Data wallet balance</div>
+            </div>
           </div>
-        )}
 
-        {dataFetched && !showErrorOccured && (
-          <>
-            <div className="hover:shadow-orange-400 flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faNairaSign}
-                className="text-xl text-green-600 mr-4"
-              />
-              <div>
-                <div className="text-lg font-semibold">
-                  {balances.dataWalletBalance}
-                </div>
-                <div className="text-gray-600">Data wallet balance</div>
+          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+            <FontAwesomeIcon
+              icon={faNairaSign}
+              className="text-xl text-green-600 mr-4"
+            />
+            <div>
+              <div className="text-lg font-semibold">
+                {balances.transferableBalance}
+              </div>
+              <div className="text-gray-600">
+                Transferable balance flutterwave
               </div>
             </div>
+          </div>
 
-            <div className="hover:shadow-orange-400 flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faNairaSign}
-                className="text-xl text-green-600 mr-4"
-              />
-              <div>
-                <div className="text-lg font-semibold">
-                  {balances.transferableBalance}
-                </div>
-                <div className="text-gray-600">
-                  Transferable balance flutterwave
-                </div>
+          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+            <FontAwesomeIcon
+              icon={faNairaSign}
+              className="text-xl text-green-600 mr-4"
+            />
+            <div>
+              <div className="text-lg font-semibold">
+                {balances.ledgerBalance}
               </div>
+              <div className="text-gray-600">Ledger balance flutterwave</div>
             </div>
+          </div>
 
-            <div className="hover:shadow-orange-400 flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faNairaSign}
-                className="text-xl text-green-600 mr-4"
-              />
-              <div>
-                <div className="text-lg font-semibold">
-                  {balances.ledgerBalance}
-                </div>
-                <div className="text-gray-600">Ledger balance flutterwave</div>
+          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+            <FontAwesomeIcon
+              icon={faNairaSign}
+              className="text-xl text-green-600 mr-4"
+            />
+            <div>
+              <div className="text-lg font-semibold">
+                {balances.virtualAccountBalance}
               </div>
+              <div className="text-gray-600">Virtual account balance</div>
             </div>
-
-            <div className="hover:shadow-orange-400 flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faNairaSign}
-                className="text-xl text-green-600 mr-4"
-              />
-              <div>
-                <div className="text-lg font-semibold">
-                  {balances.virtualAccountBalance}
-                </div>
-                <div className="text-gray-600">Virtual account balance</div>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

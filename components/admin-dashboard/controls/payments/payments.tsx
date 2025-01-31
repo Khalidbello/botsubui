@@ -105,7 +105,7 @@ const Payments: React.FC<{
   useEffect(() => {
     setPayments([]);
     setShowLoader(true);
-    fetchPaymentLists(pageNum);
+    //fetchPaymentLists(pageNum);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateRange, url, emailfetch]);
 

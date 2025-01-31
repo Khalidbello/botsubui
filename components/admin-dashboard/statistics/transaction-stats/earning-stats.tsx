@@ -74,9 +74,9 @@ export default function EarningsStats({
   }, [dateRange]);
 
   return (
-    <div className="mt-16 mx-6 rounded-lg border-[1px] border-blue-300  px-6 py-8 xl:max-w-[70rem] xl:mx-auto">
-      <div className="font-semibold mb-2 flex justify-between items-start flex-wrap flex-col md:flex-row md:items-center">
-        <span className="mb-2">Transactions </span>
+    <div className="max-w-[60rem] mb-14 mx-auto px-6 py-8 rounded-lg border border-blue-300">
+      <div className="font-semibold mb-4 flex flex-col md:flex-row md:items-center justify-between flex-wrap">
+        <span className="mb-2 md:mb-0">Transactions</span>
         <FilterComponent
           setDateRange={setDateRange}
           getCurrentDate={getCurrentDate}
@@ -84,15 +84,16 @@ export default function EarningsStats({
           updateFilterable={updateFilterable}
         />
       </div>
+
       {showError ? (
         <div className="text-red-500 text-sm text-center">
           An error occured... <br /> please try reloading page
         </div>
       ) : (
-        <div className="flex justify-around flex-col screenRow:flex-row flex-wrap  items-stretch gap-6 mt-8">
+        <>
           {dataFetched ? (
-            <>
-              <div className="hover:shadow-blue-200 flex flex-col bg-white shadow-md rounded-lg p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+              <div className="border flex flex-col justify-center items-center shadow-md rounded-lg p-6 bg-white hover:shadow-blue-200">
                 <FontAwesomeIcon
                   icon={faGlobe}
                   className="text-xl text-purple-500 mr-4"
@@ -107,7 +108,7 @@ export default function EarningsStats({
                 </div>
               </div>
 
-              <div className="hover:shadow-blue-200 flex flex-col bg-white shadow-md rounded-lg p-6">
+              <div className="border flex flex-col justify-center items-center shadow-md rounded-lg p-6 bg-white hover:shadow-blue-200">
                 <FontAwesomeIcon
                   icon={faQuestion}
                   className="text-xl text-red-500 mr-4"
@@ -122,7 +123,7 @@ export default function EarningsStats({
                 </div>
               </div>
 
-              <div className="hover:shadow-blue-200 flex flex-col bg-white shadow-md rounded-lg p-6">
+              <div className="border flex flex-col justify-center items-center shadow-md rounded-lg p-6 bg-white hover:shadow-blue-200">
                 <FontAwesomeIcon
                   icon={faCheckCircle}
                   className="text-xl text-blue-500 mr-4"
@@ -137,7 +138,7 @@ export default function EarningsStats({
                 </div>
               </div>
 
-              <div className="hover:shadow-blue-200 flex flex-col bg-white shadow-md rounded-lg p-6">
+              <div className="border flex flex-col justify-center items-center shadow-md rounded-lg p-6 bg-white hover:shadow-blue-200">
                 <FontAwesomeIcon
                   icon={faRecordVinyl}
                   className="text-xl text-cyan-600 mr-4"
@@ -152,23 +153,23 @@ export default function EarningsStats({
                 </div>
               </div>
 
-              <div className="hover:shadow-blue-200 flex flex-col bg-white shadow-md rounded-lg p-6">
+              <div className="border flex flex-col justify-center items-center shadow-md rounded-lg p-6 bg-white hover:shadow-blue-200 sm:col-span-2">
                 <FontAwesomeIcon
                   icon={faNairaSign}
                   className="text-xl text-green-500 mr-4"
                 />
                 <div className="flex items-center gap-x-2">
                   <div className="text-lg font-semibold mb-1">
-                    {datas.total}
+                    {datas.profit}
                   </div>
                   <div className="text-gray-600 text-sm">Profit</div>
                 </div>
               </div>
-            </>
+            </div>
           ) : (
             <Loader2 h="h-[4rem]" />
           )}
-        </div>
+        </>
       )}
     </div>
   );

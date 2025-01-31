@@ -11,13 +11,11 @@ export default function Page() {
   const url: string | undefined = process.env.NEXT_PUBLIC_URL;
 
   return (
-    <>
-      <div className="px-1 md:mx-4">
-        <ToDaysEarning url={url} router={router} />
-        <EarningsTrend url={url} router={router} />
-        <EarningsStats url={url} router={router} />
-        <Balances url={url} router={router} />
-      </div>
-    </>
+    <div className="px-8 py-14 md:py-20">
+      <ToDaysEarning url={url} router={router} />
+      <EarningsTrend url={url} router={router} />
+      <EarningsStats url={url} router={router} />
+      <Balances url={url} router={router} />
+    </div>
   );
 }

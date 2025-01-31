@@ -73,7 +73,7 @@ export default function Page() {
           } else if (response.status === 401) {
             setShowError("Login credentials not correct..");
           } else if (response.status === 404) {
-            setShowError("User with credentials not found.");
+            setShowError("Admin with credentials not found.");
           } else {
             setShowError("Something went wrong please try again.");
           }
@@ -123,7 +123,6 @@ export default function Page() {
         className="rounded-xl bg-white px-4 pt-12 pb-4 min-w-[20rem] max-w-[24rem]"
       >
         <div className="text-center mb-6">
-          {" "}
           <span className="px-4 py-2 rounded-xl bg-blue-600 text-white font-semibold">
             BotSub Admin
           </span>
@@ -175,21 +174,19 @@ export default function Page() {
             username cannot be empty
           </div>
         )}
-        <div className="text-green-400 text-center py-2">{showLoggedIn}</div>
+        <div className="text-green-700 text-center py-2">{showLoggedIn}</div>
         <div className="my-8 text-center px-2 text-sm text-red-500">
           {error}
         </div>
 
         <div className="text-right mt-10">
-          {" "}
           <button
             ref={button}
             type="submit"
-            className="text-blue-600 bg-blue-100 px-8 py-2 rounded-full"
+            className="text-blue-600 bg-blue-100 px-8 py-2 rounded-full font-semibold"
           >
-            {" "}
-            login{" "}
-          </button>{" "}
+            login
+          </button>
         </div>
       </form>
     </div>
