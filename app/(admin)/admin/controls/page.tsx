@@ -7,12 +7,14 @@ import PendingTransactions from "@/components/admin-dashboard/controls/pending-t
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 import {
+  faBroadcastTower,
   faClock,
   faMoneyBill,
   faNoteSticky,
   faWifi,
 } from "@fortawesome/free-solid-svg-icons";
 import Payments from "@/components/admin-dashboard/controls/payments/payments";
+import BroadCast from "@/components/admin-dashboard/controls/broadcast";
 
 export default function Controls() {
   const router = useRouter();
@@ -97,6 +99,20 @@ export default function Controls() {
               className="w-3 h-3 text-blue-600"
             />
           </button>
+          <span className="w-[2px] h-[2rem] bg-gray-300"></span>
+          <button
+            ref={paymentBtRef}
+            onClick={(e) => changeView(e, "broadcast")}
+            className={`flex items-center justify-center gap-2 h-full ${
+              inView === "broadcast" && "border-b-2 border-b-blue-300"
+            }`}
+          >
+            Broadcast
+            <FontAwesomeIcon
+              icon={faBroadcastTower}
+              className="w-3 h-3 text-blue-600"
+            />
+          </button>
         </header>
 
         {inView === "networkStatus" && (
@@ -112,6 +128,9 @@ export default function Controls() {
         )}
 
         {inView === "payments" && <Payments url={url} router={router} />}
+
+        {inView === "broadcast" && <BroadCast url={url} router={router} />}
+        {/* <BroadCast url={url} router={router} /> */}
       </div>
     </>
   );

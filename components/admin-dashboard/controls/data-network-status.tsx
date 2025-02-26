@@ -103,13 +103,15 @@ export default function DataNetworkStatus({
   }, [showLoader, url]);
 
   return (
-    <div className="mt-10 px-6 py-4 max-w-xl mx-4 screen1:mx-auto">
+    <div className="h-full w-full mt-10 px-6 py-4 max-w-xl mx-4 screen1:mx-auto">
       {showError ? (
         <div className="text-sm text-red-500 text-center">
           Sorry an error occured... <br /> pls try reloading page
         </div>
       ) : showLoader ? (
-        <Loader2 h="h-[4rem]" />
+        <div className=" h-[70%] w-full flex items-center justify-center">
+          <Loader2 h="h-[4rem]" />
+        </div>
       ) : (
         <>
           <div className="flex items-center justify-center gap-x-8 gap-y-6 flex-wrap">
