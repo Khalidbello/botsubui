@@ -59,11 +59,11 @@ export default function EarningsTrend({
 
       const data = await response.json();
 
-      // setDatas({
-      //   dates: data.dates,
-      //   counts: data.numTrans,
-      //   profits: data.profits,
-      // });
+      setDatas({
+        dates: data.dates,
+        counts: data.numTrans,
+        profits: data.profits,
+      });
       setDataFetched(true);
     } catch (err) {
       setShowError(true);
