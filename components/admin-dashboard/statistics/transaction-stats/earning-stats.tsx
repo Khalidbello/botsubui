@@ -27,11 +27,11 @@ export default function EarningsStats({
 }) {
   const [showError, setShowError] = useState<boolean>(false);
   const [datas, setData] = useState({
-    total: 0,
-    succcessful: 0,
+    total: 5000,
+    succcessful: 4967,
     pending: 0,
-    profit: 0,
-    average: 0,
+    profit: 60000,
+    average: 1200,
   });
   const [dataFetched, setDataFetched] = useState<boolean>(false);
   const [filterable, setFilterable] = useState<boolean>(false);
@@ -59,7 +59,7 @@ export default function EarningsStats({
 
       updateFilterable(false);
       const data = await response.json();
-      setData(data);
+      //setData(data);
       setDataFetched(true);
     } catch (err) {
       console.log("an error occurred while trying to fetch data", err);

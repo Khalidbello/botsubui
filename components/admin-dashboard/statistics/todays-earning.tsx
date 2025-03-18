@@ -26,10 +26,10 @@ export default function ToDaysEarning({
 }) {
   const [dataFetched, setDataFetched] = useState<boolean>(false);
   const [datas, setDatas] = useState({
-    total: 0,
-    succcessful: 0,
+    total: 1200,
+    succcessful: 1200,
     pending: 0,
-    profit: 0,
+    profit: 50000,
   }); // Declare datas state variable
   const [showErrorOccured, setShowErrorOccured] = useState<boolean>(false);
 
@@ -47,7 +47,7 @@ export default function ToDaysEarning({
 
       const data = await response.json();
 
-      setDatas({ ...data }); // Set the datas state variable with fetched data
+      //setDatas({ ...data }); // Set the datas state variable with fetched data
       setDataFetched(true);
     } catch (err) {
       setShowErrorOccured(true);

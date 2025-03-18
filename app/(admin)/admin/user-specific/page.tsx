@@ -2,6 +2,7 @@
 
 import UsersStatistics from "@/components/admin-dashboard/user-specific-stats/generic-stats";
 import ProfitUp from "@/components/admin-dashboard/user-specific-stats/profit-up";
+import WhatsappUsersListing from "@/components/admin-dashboard/user-specific-stats/whatsapp-users-listing/listing";
 import {
   faArrowDown,
   faArrowUp,
@@ -68,10 +69,25 @@ const Page = () => {
             className="w-3 h-3 text-blue-600"
           />
         </button>
+        <span className="w-[2px] h-[2rem] bg-gray-300"></span>
+        <button
+          ref={genericBtRef}
+          onClick={(e) => changeView(e, "whatsappUsersListing")}
+          className={`flex items-center justify-center gap-2 h-full ${
+            inView === "whatsappUsersListing" && "border-b-2 border-b-blue-300"
+          }`}
+        >
+          WhataApp Users
+          <FontAwesomeIcon
+            icon={faChartBar}
+            className="w-3 h-3 text-blue-600"
+          />
+        </button>
       </header>
 
       {inView === "usersStats" && <UsersStatistics />}
       {inView === "charts" && <UsersStatistics />}
+      {inView === "whatsappUsersListing" && <WhatsappUsersListing />}
     </div>
   );
 };

@@ -16,10 +16,10 @@ export default function Balances({
 }) {
   const [dataFetched, setDataFetched] = useState<boolean>(false);
   const [balances, setBalances] = useState({
-    dataWalletBalance: 0,
-    transferableBalance: 0,
-    ledgerBalance: 0,
-    virtualAccountBalance: 0,
+    dataWalletBalance: "6,050,000",
+    transferableBalance: "5,900,000",
+    ledgerBalance: "109,000",
+    virtualAccountBalance: "3,000,000",
   });
   const [showErrorOccured, setShowErrorOccured] = useState<boolean>(false);
 
