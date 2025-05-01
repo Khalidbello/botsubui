@@ -59,7 +59,7 @@ export default function EarningsStats({
 
       updateFilterable(false);
       const data = await response.json();
-      //setData(data);
+      setData(data);
       setDataFetched(true);
     } catch (err) {
       console.log("an error occurred while trying to fetch data", err);

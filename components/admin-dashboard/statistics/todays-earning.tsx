@@ -47,7 +47,7 @@ export default function ToDaysEarning({
 
       const data = await response.json();
 
-      //setDatas({ ...data }); // Set the datas state variable with fetched data
+      setDatas({ ...data }); // Set the datas state variable with fetched data
       setDataFetched(true);
     } catch (err) {
       setShowErrorOccured(true);

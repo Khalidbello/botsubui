@@ -37,9 +37,9 @@ export default function Balances({
 
       // Handle potential null or empty `flutterWaveBalances` array
 
-      // setBalances({
-      //   ...data,
-      // });
+      setBalances({
+        ...data,
+      });
     } catch (error) {
       console.log("an error occurred........", error);
       setShowErrorOccured(true);
