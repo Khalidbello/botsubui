@@ -1,6 +1,6 @@
 "use client";
 
-import EarningsTrend from "@/components/admin-dashboard/statistics/earning-trend/earnings-trend";
+import EarningsTrend from "@/components/admin-dashboard/statistics/earning-trend/earnings-trend
 import ToDaysEarning from "@/components/admin-dashboard/statistics/todays-earning";
 import Balances from "@/components/admin-dashboard/statistics/balances";
 import { useRouter } from "next/navigation";

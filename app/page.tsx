@@ -1,21 +1,27 @@
-import Header from "@/components/bot-landing/header";
-import Hero from "@/components/bot-landing/hero";
-import Patners from "@/components/bot-landing/patners";
-import Footer from "@/components/bot-landing/footer";
-import BackGround from "@/components/bot-landing/bg";
+import HeroSection from "@/components/sections/HeroSection";
+import FeaturesSection from "@/components/sections/FeaturesSection";
+import Navbar from "@/components/ui/NavBar";
+import { MotionDiv } from "@/components/motion-client";
+import { Footer } from "@/components/sections/Footer";
+import { FAQSection } from "@/components/sections/Faq";
+import { HowItWorks } from "@/components/sections/HowItworks";
+import CustomerReviews from "@/components/sections/Review";
 
-const Page = () => {
+export default function Home() {
   return (
-    <div className="w-full h-full overflow-auto bg-yellow-50 flex justify-center items-center pt-[14rem]">
-      <BackGround />
-      <Header />
-      <div className="relative z-5 flex flex-col justify-center gap-y-[17%] items-center h-[60%] min-h-[30rem] max-h-[40rem] pb-[5rem]">
-        <Hero />
-        <Patners />
-      </div>
+    <MotionDiv
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-white"
+    >
+      <Navbar />
+      <HeroSection />
+      <CustomerReviews />
+      <FeaturesSection />
+      <HowItWorks />
+      <FAQSection />
       <Footer />
-    </div>
+    </MotionDiv>
   );
-};
-
-export default Page;
+}

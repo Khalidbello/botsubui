@@ -1,4 +1,4 @@
-import Graph from "@/components/admin-dashboard/statistics/earning-trend.tsx/graph";
+import Graph from "@/components/admin-dashboard/statistics/earning-trend/graph";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loader2 from "@/components/admin-dashboard/loader2";
