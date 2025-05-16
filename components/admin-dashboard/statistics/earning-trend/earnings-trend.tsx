@@ -1,5 +1,6 @@
+"use client";
+
 import Graph from "@/components/admin-dashboard/statistics/earning-trend/graph";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loader2 from "@/components/admin-dashboard/loader2";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";

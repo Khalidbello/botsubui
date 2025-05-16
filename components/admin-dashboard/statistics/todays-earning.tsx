@@ -1,10 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import {
-  TransactionsFormer,
-  mockdataType,
-} from "@/components/admin-dashboard/statistics/transaction-stats/transactions-stats";
 import { useEffect, useState } from "react";
 import Loader2 from "@/components/admin-dashboard/loader2";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
@@ -15,7 +10,6 @@ import {
   faNairaSign,
   faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
-import { error } from "console";
 
 export default function ToDaysEarning({
   url,

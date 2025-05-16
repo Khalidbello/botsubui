@@ -1,7 +1,6 @@
 import RollerAnimation from "@/components/bot-landing/roller-white";
-import { div } from "framer-motion/client";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 const BroadCast: React.FC<{
   url: string | undefined;

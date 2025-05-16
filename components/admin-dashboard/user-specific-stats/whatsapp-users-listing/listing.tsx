@@ -29,7 +29,7 @@ const WhatsappUsersListing = () => {
     startDate: getCurrentDate(),
     endDate: getCurrentDate(),
   }); // to hold date range for search
-  let margin = 0; // Number of items per page
+  const [margin, setMargin] = useState(0); // Number of items per page
 
   // funtion to fetch data
   const fetchData = async () => {
@@ -60,7 +60,7 @@ const WhatsappUsersListing = () => {
   };
 
   useEffect(() => {
-    margin = 0;
+    setMargin(0);
     setData([]);
     setReload(true);
     fetchData();
@@ -75,7 +75,7 @@ const WhatsappUsersListing = () => {
 
   // function to fetch more
   const fetchMore = () => {
-    margin += 10;
+    setMargin(margin + 10);
     fetchData();
   };
 
