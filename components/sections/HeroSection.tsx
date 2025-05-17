@@ -38,7 +38,7 @@ export default function HeroSection() {
         onClick={() => setIsModalOpen(true)}
         className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all duration-300"
       >
-        Start Chatting Now
+        Sub Now
       </MotionButton>
 
       <PlatformModal
