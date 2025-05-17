@@ -58,7 +58,7 @@ export default function PlatformModal({ isOpen, onClose }: PlatformModalProps) {
               <MotionA
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                href="https://m.me/100094053438576"
+                href="https://facebook.com/100094053438576"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center space-x-3 bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg transition-colors"

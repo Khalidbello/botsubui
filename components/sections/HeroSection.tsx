@@ -8,12 +8,12 @@ export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section className="container mx-auto px-6 py-20 md:py-32 flex flex-col items-center text-center min-h-[70vh]">
+    <section className="container mx-auto px-6 py-20 md:py-32 flex flex-col items-center justify-center text-center min-h-[70vh]">
       <MotionH1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
+        className="text-4xl md:text-6xl font-bold text-gray-900 mb-8 md:mb-14"
       >
         Instant <span className="text-yellow-500">Airtime</span> &{" "}
         <span className="text-blue-500">Data</span> Purchases
@@ -23,10 +23,10 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-xl text-gray-600 mb-10 max-w-2xl"
+        className="text-xl text-gray-600 mb-12 md:mb-20 max-w-2xl"
       >
         Get your mobile data and airtime instantly through WhatsApp or Facebook
-        Messenger. No apps, no hassle.
+        Even While On Freemode. No apps, no hassle.
       </MotionP>
 
       <MotionButton
