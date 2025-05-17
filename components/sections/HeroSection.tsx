@@ -36,7 +36,7 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
         onClick={() => setIsModalOpen(true)}
-        className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all duration-300"
+        className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-12 rounded-full shadow-lg transition-all duration-300"
       >
         Sub Now
       </MotionButton>
