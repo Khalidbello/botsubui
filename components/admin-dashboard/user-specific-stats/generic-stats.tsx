@@ -16,56 +16,55 @@ import {
 import LoadingAnimation from "../loader2";
 import { useRouter } from "next/navigation";
 
+interface UserStat {
+  _id: string;
+  maxProfit?: number;
+  minProfit?: number;
+  transactionCount?: number;
+}
+
+interface StatsData {
+  totalProfi: number;
+  numOfTransactions: number;
+  numOfUsersWithPurchase: number;
+  maxProfitPerUser5: UserStat[];
+  minProfitPerUser5: UserStat[];
+  maxNumOfTransactiosnPerUser5: UserStat[];
+  minNumOfTransactiosnPerUser5: UserStat[];
+  averageProfitPerUser: number;
+  averageProfitPerTransaction: number;
+  averageTransactionPerUser: number;
+}
+
 const UsersStatistics = () => {
   const router = useRouter();
   const [filterable, setFilterable] = useState<boolean>(false);
   const [dateRange, setDateRange] = useState<DateRangeType>({
     startDate: getCurrentDate(),
     endDate: getCurrentDate(),
-  }); // to hold date range for search
+  });
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [data, setData] = useState<any>({
+  const [error, setError] = useState<string>("");
+  const [data, setData] = useState<StatsData>({
     totalProfi: 0,
     numOfTransactions: 0,
     numOfUsersWithPurchase: 0,
-    maxProfitPerUser5: [
-      {
-        _id: "2348188146243",
-        maxProfit: -56.87999999999991,
-      },
-    ],
-    minProfitPerUser5: [
-      {
-        _id: "24536258259321654",
-        minProfit: -31.400000000000006,
-      },
-    ],
-    maxNumOfTransactiosnPerUser5: [
-      {
-        _id: "2348188146243",
-        transactionCount: 3,
-      },
-    ],
-    minNumOfTransactiosnPerUser5: [
-      {
-        _id: "24536258259321654",
-        transactionCount: 1,
-      },
-    ],
+    maxProfitPerUser5: [],
+    minProfitPerUser5: [],
+    maxNumOfTransactiosnPerUser5: [],
+    minNumOfTransactiosnPerUser5: [],
     averageProfitPerUser: 0,
     averageProfitPerTransaction: 0,
     averageTransactionPerUser: 0,
   });
 
-  // function to update fiterable
   const updateFilterable = (filterable: boolean) => {
     setFilterable(filterable);
-    //pageNum = 1;
   };
 
-  // funtion to fetch data
   const fetchData = async () => {
     setIsLoading(true);
+    setError("");
 
     try {
       const response = await fetch(
@@ -75,13 +74,21 @@ const UsersStatistics = () => {
         }
       );
 
-      if (response.status === 401) return router.push("/admin-login");
-      if (response.status !== 200) throw "Something went wrong error";
+      if (response.status === 401) {
+        router.push("/admin-login");
+        return;
+      }
 
-      const data = await response.json();
-      setData(data);
-      setFilterable(false);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const result = await response.json();
+      setData(result);
     } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "An unknown error occurred"
+      );
     } finally {
       setIsLoading(false);
     }
@@ -92,9 +99,11 @@ const UsersStatistics = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateRange]);
 
+  const formatUserId = (id: string) => id.slice(-4);
+
   return (
-    <div className="w-full h-full">
-      <div className="w-full flex items-center justify-center mt-6">
+    <div className="w-full min-h-screen p-4">
+      <div className="w-full flex items-center justify-center mb-6">
         <FilterComponent
           setDateRange={setDateRange}
           getCurrentDate={getCurrentDate}
@@ -102,179 +111,175 @@ const UsersStatistics = () => {
           updateFilterable={updateFilterable}
         />
       </div>
-      <div className="flex justify-around flex-col screenRow:flex-row flex-wrap items-stretch gap-y-10 gap-6 mt-4 p-4">
-        {isLoading && (
-          <div className="w-full h-[30rem] flex items-center justify-center">
-            <LoadingAnimation h="h-[5rem]" />
+
+      {error && (
+        <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-4">
+          Error: {error}
+        </div>
+      )}
+
+      {isLoading ? (
+        <div className="w-full h-[30rem] flex items-center justify-center">
+          <LoadingAnimation h="h-[5rem]" />
+        </div>
+      ) : (
+        <div className="space-y-8">
+          {/* Summary Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <StatCard
+              icon={faUser}
+              value={data.numOfUsersWithPurchase}
+              label="Active Users"
+              isCount={true}
+            />
+            <StatCard
+              icon={faNairaSign}
+              value={data.totalProfi}
+              label="Total Profit"
+              isCurrency={true}
+            />
+            <StatCard
+              icon={faUser}
+              value={data.numOfTransactions}
+              label="Total Transactions"
+              isCount={true}
+            />
           </div>
-        )}
 
-        {!isLoading && (
-          <>
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faUser}
-                className="w-8 text-blue-400 mr-4"
-              />
-              <div>
-                <div className="text-xl">{data.totalProfi.toFixed(2)}</div>
-                <div className="text-gray-600">Total profit</div>
-              </div>
-            </div>
+          {/* Averages Section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <StatCard
+              icon={faNairaSign}
+              value={data.averageProfitPerUser}
+              label="Avg Profit/User"
+              isCurrency={true}
+            />
+            <StatCard
+              icon={faNairaSign}
+              value={data.averageTransactionPerUser}
+              label="Avg Transactions/User"
+              isDecimal={true}
+            />
+            <StatCard
+              icon={faNairaSign}
+              value={data.averageProfitPerTransaction}
+              label="Avg Profit/Transaction"
+              isCurrency={true}
+            />
+          </div>
 
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faUser}
-                className="w-8 text-blue-400 mr-4"
-              />
-              <div>
-                <div className="text-xl">{data.numOfTransactions}</div>
-                <div className="text-gray-600">
-                  Total number of transactions
-                </div>
-              </div>
-            </div>
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faUser}
-                className="w-8 text-blue-400 mr-4"
-              />
-              <div>
-                <div className="text-xl">{data.numOfUsersWithPurchase}</div>
-                <div className="text-gray-600">
-                  Users that made transactions
-                </div>
-              </div>
-            </div>
+          {/* Profit Extremes */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ExtremeStatsCard
+              icon={faArrowAltCircleUp}
+              data={data.maxProfitPerUser5}
+              label="Top Profitable Users"
+              valueKey="maxProfit"
+              isCurrency={true}
+            />
+            <ExtremeStatsCard
+              icon={faArrowAltCircleDown}
+              data={data.minProfitPerUser5}
+              label="Least Profitable Users"
+              valueKey="minProfit"
+              isCurrency={true}
+            />
+          </div>
 
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faNairaSign}
-                className="w-8 text-blue-500 mr-4"
-              />
-              <div>
-                <div className="text-xl">
-                  {data.averageProfitPerUser.toFixed(2)}
-                </div>
-                <div className="text-gray-600">Average profit per user</div>
-              </div>
-            </div>
+          {/* Transaction Extremes */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ExtremeStatsCard
+              icon={faArrowAltCircleUp}
+              data={data.maxNumOfTransactiosnPerUser5}
+              label="Most Active Users"
+              valueKey="transactionCount"
+              isCount={true}
+            />
+            <ExtremeStatsCard
+              icon={faArrowAltCircleDown}
+              data={data.minNumOfTransactiosnPerUser5}
+              label="Least Active Users"
+              valueKey="transactionCount"
+              isCount={true}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faNairaSign}
-                className="w-8 text-blue-500 mr-4"
-              />
-              <div>
-                <div className="text-xl">
-                  {data.averageTransactionPerUser.toFixed(2)}
-                </div>
-                <div className="text-gray-600">
-                  Average transaction per user
-                </div>
-              </div>
-            </div>
+// Helper component for stat cards
+const StatCard = ({
+  icon,
+  value,
+  label,
+  isCurrency = false,
+  isCount = false,
+  isDecimal = false,
+}: {
+  icon: any;
+  value: number;
+  label: string;
+  isCurrency?: boolean;
+  isCount?: boolean;
+  isDecimal?: boolean;
+}) => {
+  const formattedValue = isCurrency
+    ? value.toFixed(2)
+    : isCount
+    ? value.toString()
+    : isDecimal
+    ? value.toFixed(2)
+    : value;
 
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faNairaSign}
-                className="w-8 text-blue-500 mr-4"
-              />
-              <div>
-                <div className="text-xl">
-                  {data.averageProfitPerTransaction.toFixed(2)}
-                </div>
-                <div className="text-gray-600">
-                  Average profit per transaction
-                </div>
-              </div>
-            </div>
-
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faArrowAltCircleUp}
-                className="w-8 text-blue-500 mr-4"
-              />
-              <div>
-                <div className="text-xl">
-                  {data.maxProfitPerUser5.map((ele: any, index: number) => {
-                    return (
-                      <span key={index}>{ele.maxProfit.toFixed(2)}, </span>
-                    );
-                  })}
-                </div>
-                <div className="text-gray-600">Maximum profitper user</div>
-              </div>
-            </div>
-
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faArrowAltCircleDown}
-                className="w-8 text-blue-500 mr-4"
-              />
-              <div>
-                <div className="text-xl">
-                  {data.minProfitPerUser5.map((ele: any, index: number) => {
-                    return (
-                      <span key={index}>{ele.minProfit.toFixed(2)}, </span>
-                    );
-                  })}
-                </div>
-                <div className="text-gray-600">
-                  Minimum transaction per user
-                </div>
-              </div>
-            </div>
-
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faArrowAltCircleUp}
-                className="w-8 text-blue-500 mr-4"
-              />
-              <div>
-                <div className="text-xl">
-                  {data.maxNumOfTransactiosnPerUser5.map(
-                    (ele: any, index: number) => {
-                      return (
-                        <span key={index}>
-                          {ele.transactionCount.toFixed(2)},{" "}
-                        </span>
-                      );
-                    }
-                  )}
-                </div>
-                <div className="text-gray-600">
-                  Maximum transaction per user
-                </div>
-              </div>
-            </div>
-
-            <div className="hover:shadow-blue-200  flex items-center bg-white shadow-md rounded-lg p-4">
-              <FontAwesomeIcon
-                icon={faArrowAltCircleDown}
-                className="w-8 text-blue-500 mr-4"
-              />
-              <div>
-                <div className="text-xl">
-                  {data.minNumOfTransactiosnPerUser5.map(
-                    (ele: any, index: number) => {
-                      return (
-                        <span key={index}>
-                          {ele.transactionCount.toFixed(2)},{" "}
-                        </span>
-                      );
-                    }
-                  )}
-                </div>
-                <div className="text-gray-600">
-                  Mininum transaction per user
-                </div>
-              </div>
-            </div>
-          </>
-        )}
+  return (
+    <div className="hover:shadow-blue-200 flex items-center bg-white shadow-md rounded-lg p-4">
+      <FontAwesomeIcon icon={icon} className="w-8 text-blue-500 mr-4" />
+      <div>
+        <div className="text-xl">{formattedValue}</div>
+        <div className="text-gray-600">{label}</div>
       </div>
-      <div className="h-[10rem] w-full bg-white"></div>
+    </div>
+  );
+};
+
+// Helper component for extreme stats
+const ExtremeStatsCard = ({
+  icon,
+  data,
+  label,
+  valueKey,
+  isCurrency = false,
+  isCount = false,
+}: {
+  icon: any;
+  data: UserStat[];
+  label: string;
+  valueKey: keyof UserStat;
+  isCurrency?: boolean;
+  isCount?: boolean;
+}) => {
+  return (
+    <div className="hover:shadow-blue-200 flex items-start bg-white shadow-md rounded-lg p-4">
+      <FontAwesomeIcon icon={icon} className="w-8 text-blue-500 mr-4 mt-1" />
+      <div>
+        <div className="space-y-2">
+          {data.map((item) => (
+            <div key={item._id} className="flex justify-between">
+              <span>User {item._id}:</span>
+              <span>
+                {isCurrency
+                  ? (item[valueKey] as number)?.toFixed(2)
+                  : isCount
+                  ? item[valueKey]?.toString()
+                  : item[valueKey]}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="text-gray-600 mt-2">{label}</div>
+      </div>
     </div>
   );
 };

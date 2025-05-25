@@ -77,7 +77,7 @@ const Page = () => {
             inView === "whatsappUsersListing" && "border-b-2 border-b-blue-300"
           }`}
         >
-          WhataApp Users
+          W Users
           <FontAwesomeIcon
             icon={faChartBar}
             className="w-3 h-3 text-blue-600"
