@@ -114,7 +114,7 @@ const PrivacyPolicy = () => {
           <h2 className="text-xl font-semibold mb-4">8. Contact Us</h2>
           <p>
             If you have any questions about this Privacy Policy, please contact
-            us at privacy@botsub.com.
+            us at thebotsubteam@gmail.com
           </p>
         </section>
       </div>
