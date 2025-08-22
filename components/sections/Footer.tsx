@@ -13,6 +13,10 @@ export function Footer() {
             <p className="text-gray-400">
               Instant airtime and data purchases through chat.
             </p>
+            <p className="text-gray-400">
+              <b>Address2:</b> Dadinkowa Street, Nasarawa 800104, Kaduna,
+              Nigeria
+            </p>
             <div className="flex space-x-4">
               <a
                 href="#"
