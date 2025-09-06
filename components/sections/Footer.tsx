@@ -14,7 +14,7 @@ export function Footer() {
               Instant airtime and data purchases through chat.
             </p>
             <p className="text-gray-400">
-              <b>Address2:</b> Dadinkowa Street, Nasarawa 800104, Kaduna,
+              <b>Address:</b>2 Dadinkowa Street, Nasarawa 800104, Kaduna,
               Nigeria
             </p>
             <div className="flex space-x-4">
