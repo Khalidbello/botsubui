@@ -16,10 +16,10 @@ export default function Balances({
 }) {
   const [dataFetched, setDataFetched] = useState<boolean>(false);
   const [balances, setBalances] = useState({
-    dataWalletBalance: "6,050,000",
-    transferableBalance: "5,900,000",
-    ledgerBalance: "109,000",
-    virtualAccountBalance: "3,000,000",
+    dataWalletBalance: 605000,
+    transferableBalance: 5900000,
+    ledgerBalance: 109000,
+    virtualAccountBalance: 3000000,
   });
   const [showErrorOccured, setShowErrorOccured] = useState<boolean>(false);
 
@@ -117,6 +117,22 @@ export default function Balances({
                 {balances.virtualAccountBalance}
               </div>
               <div className="text-gray-600">Virtual account balance</div>
+            </div>
+          </div>
+
+          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+            <FontAwesomeIcon
+              icon={faNairaSign}
+              className="text-xl text-green-600 mr-4"
+            />
+            <div>
+              <div className="text-lg font-semibold">
+                {balances.ledgerBalance +
+                  balances.transferableBalance +
+                  balances.dataWalletBalance -
+                  balances.virtualAccountBalance}
+              </div>
+              <div className="text-gray-600">Net balance</div>
             </div>
           </div>
         </div>
