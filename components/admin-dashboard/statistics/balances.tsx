@@ -120,17 +120,19 @@ export default function Balances({
             </div>
           </div>
 
-          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+          <div className="col-span-2 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
             <FontAwesomeIcon
               icon={faNairaSign}
               className="text-xl text-green-600 mr-4"
             />
             <div>
               <div className="text-lg font-semibold">
-                {balances.ledgerBalance +
+                {(
+                  balances.ledgerBalance +
                   balances.transferableBalance +
                   balances.dataWalletBalance -
-                  balances.virtualAccountBalance}
+                  balances.virtualAccountBalance
+                ).toFixed(2)}
               </div>
               <div className="text-gray-600">Net balance</div>
             </div>
