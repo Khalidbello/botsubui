@@ -65,8 +65,9 @@ export default function Balances({
       )}
 
       {dataFetched && !showErrorOccured && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6">
-          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Data Wallet Balance */}
+          <div className="flex items-center bg-white border shadow-md rounded-lg p-4 hover:shadow-blue-200 transition-shadow">
             <FontAwesomeIcon
               icon={faNairaSign}
               className="text-xl text-green-600 mr-4"
@@ -75,11 +76,12 @@ export default function Balances({
               <div className="text-lg font-semibold">
                 {balances.dataWalletBalance}
               </div>
-              <div className="text-gray-600">Data wallet balance</div>
+              <div className="text-gray-600 text-sm">Data wallet balance</div>
             </div>
           </div>
 
-          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+          {/* Transferable Balance */}
+          <div className="flex items-center bg-white border shadow-md rounded-lg p-4 hover:shadow-blue-200 transition-shadow">
             <FontAwesomeIcon
               icon={faNairaSign}
               className="text-xl text-green-600 mr-4"
@@ -88,13 +90,14 @@ export default function Balances({
               <div className="text-lg font-semibold">
                 {balances.transferableBalance}
               </div>
-              <div className="text-gray-600">
-                Transferable balance flutterwave
+              <div className="text-gray-600 text-sm">
+                Transferable balance (Flutterwave)
               </div>
             </div>
           </div>
 
-          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+          {/* Ledger Balance */}
+          <div className="flex items-center bg-white border shadow-md rounded-lg p-4 hover:shadow-blue-200 transition-shadow">
             <FontAwesomeIcon
               icon={faNairaSign}
               className="text-xl text-green-600 mr-4"
@@ -103,11 +106,14 @@ export default function Balances({
               <div className="text-lg font-semibold">
                 {balances.ledgerBalance}
               </div>
-              <div className="text-gray-600">Ledger balance flutterwave</div>
+              <div className="text-gray-600 text-sm">
+                Ledger balance (Flutterwave)
+              </div>
             </div>
           </div>
 
-          <div className="col-span-1 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+          {/* Virtual Account Balance */}
+          <div className="flex items-center bg-white border shadow-md rounded-lg p-4 hover:shadow-blue-200 transition-shadow col-span-1 sm:col-span-2 lg:col-span-1">
             <FontAwesomeIcon
               icon={faNairaSign}
               className="text-xl text-green-600 mr-4"
@@ -116,11 +122,14 @@ export default function Balances({
               <div className="text-lg font-semibold">
                 {balances.virtualAccountBalance}
               </div>
-              <div className="text-gray-600">Virtual account balance</div>
+              <div className="text-gray-600 text-sm">
+                Virtual account balance
+              </div>
             </div>
           </div>
 
-          <div className="col-span-2 border flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-blue-200">
+          {/* Net Balance */}
+          <div className="flex items-center bg-white border shadow-md rounded-lg p-4 hover:shadow-blue-200 transition-shadow col-span-1 sm:col-span-2">
             <FontAwesomeIcon
               icon={faNairaSign}
               className="text-xl text-green-600 mr-4"
@@ -134,7 +143,7 @@ export default function Balances({
                   balances.virtualAccountBalance
                 ).toFixed(2)}
               </div>
-              <div className="text-gray-600">Net balance</div>
+              <div className="text-gray-600 text-sm">Net balance</div>
             </div>
           </div>
         </div>
