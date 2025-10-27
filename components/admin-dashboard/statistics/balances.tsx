@@ -16,7 +16,7 @@ export default function Balances({
 }) {
   const [dataFetched, setDataFetched] = useState<boolean>(false);
   const [balances, setBalances] = useState({
-    dataWalletBalance: 605000,
+    dataWalletBalance: "605000",
     transferableBalance: 5900000,
     ledgerBalance: 109000,
     virtualAccountBalance: 3000000,
@@ -139,7 +139,7 @@ export default function Balances({
                 {(
                   balances.ledgerBalance +
                   balances.transferableBalance +
-                  balances.dataWalletBalance -
+                  parseInt(balances.dataWalletBalance) -
                   balances.virtualAccountBalance
                 ).toFixed(2)}
               </div>
