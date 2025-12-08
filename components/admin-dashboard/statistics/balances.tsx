@@ -16,7 +16,8 @@ export default function Balances({
 }) {
   const [dataFetched, setDataFetched] = useState<boolean>(false);
   const [balances, setBalances] = useState({
-    dataWalletBalance: "605000",
+    asbData: "605000",
+    openData: "1004000",
     transferableBalance: 5900000,
     ledgerBalance: 109000,
     virtualAccountBalance: 3000000,
@@ -73,10 +74,24 @@ export default function Balances({
               className="text-xl text-green-600 mr-4"
             />
             <div>
-              <div className="text-lg font-semibold">
-                {balances.dataWalletBalance}
+              <div className="text-lg font-semibold">{balances.asbData}</div>
+              <div className="text-gray-600 text-sm">
+                ASBData Wallet Balance
               </div>
-              <div className="text-gray-600 text-sm">Data wallet balance</div>
+            </div>
+          </div>
+
+          {/* Data Wallet Balance */}
+          <div className="flex items-center bg-white border shadow-md rounded-lg p-4 hover:shadow-blue-200 transition-shadow">
+            <FontAwesomeIcon
+              icon={faNairaSign}
+              className="text-xl text-green-600 mr-4"
+            />
+            <div>
+              <div className="text-lg font-semibold">{balances.openData}</div>
+              <div className="text-gray-600 text-sm">
+                OpenData Wallet Balance
+              </div>
             </div>
           </div>
 
@@ -139,7 +154,8 @@ export default function Balances({
                 {(
                   balances.ledgerBalance +
                   balances.transferableBalance +
-                  parseInt(balances.dataWalletBalance) -
+                  parseInt(balances.openData) +
+                  parseInt(balances.asbData) -
                   balances.virtualAccountBalance
                 ).toFixed(2)}
               </div>
