@@ -320,7 +320,7 @@ const UserCard = ({ user, onMessage, onViewAccount }: UserCardProps) => {
             href={`https://wa.me/${user.id}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors text-sm"
+            className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors text-sm text-center"
           >
             Message
           </a>
