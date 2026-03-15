@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, ReactNode } from "react";
 import {
   DateRangeType,
   FilterComponent,
@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 interface WhatsAppUser {
+  nextAction: ReactNode;
   id: number;
   phoneNumber: string;
   name: string;
@@ -72,7 +73,7 @@ const WhatsappUsersListing = () => {
               sortBy,
               sortOrder,
             }),
-          }
+          },
         );
 
         if (response.status === 401) {
@@ -103,7 +104,7 @@ const WhatsappUsersListing = () => {
         reset ? setLoading(false) : setLoadingMore(false);
       }
     },
-    [dateRange, offset, router, sortBy, sortOrder]
+    [dateRange, offset, router, sortBy, sortOrder],
   );
 
   useEffect(() => {
@@ -116,7 +117,7 @@ const WhatsappUsersListing = () => {
     window.open(
       `https://wa.me/${phoneNumber}`,
       "_blank",
-      "noopener,noreferrer"
+      "noopener,noreferrer",
     );
   };
 
@@ -297,6 +298,10 @@ const UserCard = ({ user, onMessage, onViewAccount }: UserCardProps) => {
             </div>
           )}
 
+          <div className="flex justify-between">
+            <span>nextAction :</span>
+            <span className="font-medium">{user.nextAction}</span>
+          </div>
           <div className="flex justify-between">
             <span>Member Since:</span>
             <span className="font-medium">{dateFormatter(user.createdAt)}</span>
