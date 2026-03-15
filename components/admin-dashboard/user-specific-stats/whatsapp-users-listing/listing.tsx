@@ -316,12 +316,14 @@ const UserCard = ({ user, onMessage, onViewAccount }: UserCardProps) => {
         </div>
 
         <div className="flex gap-2">
-          <button
-            onClick={onViewAccount}
+          <a
+            href={`https://wa.me/${user.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors text-sm"
           >
             Message
-          </button>
+          </a>
         </div>
       </div>
     </div>
