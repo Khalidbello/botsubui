@@ -23,14 +23,14 @@ const UnitPending: React.FC<{
         `${url}/retry-transaction/${transactionId}/${txRef}`,
         {
           credentials: "include",
-        }
+        },
       );
 
       if (response.status === 401)
         return setShowError("Please login to continue");
       if (response.status !== 200)
         return setShowError(
-          "an error occured trying to retry failed transaction"
+          "an error occured trying to retry failed transaction",
         );
 
       const data = await response.json();
@@ -58,7 +58,7 @@ const UnitPending: React.FC<{
         `${url}/settle-transaction/${transactionId}/${senderId}`,
         {
           credentials: "include",
-        }
+        },
       );
 
       if (response.status === 401)
@@ -90,7 +90,13 @@ const UnitPending: React.FC<{
       className="rounded-lg bg-gray-50 p-4 min-w-[20rem]"
     >
       <p>
-        <strong>ID:</strong> {transaction.id}
+        <strong>UserID:</strong> {transaction.userId}
+      </p>
+      <p>
+        <strong>Transaction ID:</strong> {transaction.id}
+      </p>
+      <p>
+        <strong>Platform: </strong> {transaction.platform}
       </p>
       <p>
         <strong>Email:</strong> {transaction.email}
@@ -105,7 +111,7 @@ const UnitPending: React.FC<{
         <strong>SenderId:</strong> {transaction.senderId}
       </p>
       <p>
-        <strong>Amount:</strong> ₦{transaction.amount}
+        <strong>Amount:</strong> ₦{transaction.price}
       </p>
       <p>
         <strong>Beneficiary:</strong> {transaction.beneficiary}
